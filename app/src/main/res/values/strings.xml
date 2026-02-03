@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">Meals Planner</string>
     <!-- TODO: Remove or change this placeholder text -->
+    <string name="default_web_client_id">44946027055-d8orpneihlgeq1bl7jh708udvg8fb0v7.apps.googleusercontent.com</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="welcome_back">Welcome Back</string>
     <string name="login_to_continue_planning_meals">Login to continue planning meals</string>
@@ -33,4 +34,7 @@
     <string name="we_ve_sent_password_reset_instructions_to">We\'ve sent password reset instructions to:</string>
     <string name="check_your_email">Check Your Email</string>
     <string name="resend_email">Resend Email</string>
+    <string name="loggin_loading">Logging in...</string>
+    <string name="creating_account_loading">Creating account...</string>
+    <string name="resetting_password_loading">Resetting password...</string>
 </resources>
