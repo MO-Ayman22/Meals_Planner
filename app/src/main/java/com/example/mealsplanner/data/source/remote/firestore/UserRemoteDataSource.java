@@ -23,6 +23,22 @@ public class UserRemoteDataSource {
         );
     }
 
+    public Single<User> getUser(String uid) {
+        return Single.create(emitter ->
+                firestore.collection(USERS_COLLECTION)
+                        .document(uid)
+                        .get()
+                        .addOnSuccessListener(snapshot -> {
+                            if (snapshot.exists()) {
+                                User user = snapshot.toObject(User.class);
+                                emitter.onSuccess(user);
+                            } else {
+                                emitter.onError(new Exception("User not found"));
+                            }
+                        })
+                        .addOnFailureListener(emitter::onError)
+        );
+    }
     public Single<Boolean> exists(@NonNull String uid) {
         return Single.create(emitter ->
                 firestore.collection(USERS_COLLECTION)

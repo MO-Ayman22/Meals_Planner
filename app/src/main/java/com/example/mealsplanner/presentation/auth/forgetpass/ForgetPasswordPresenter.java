@@ -4,6 +4,8 @@ import android.app.Application;
 
 import com.example.mealsplanner.data.repository.AuthRepository;
 import com.example.mealsplanner.data.repository.UserRepository;
+import com.example.mealsplanner.data.source.local.db.AppDatabase;
+import com.example.mealsplanner.data.source.local.localsources.UserLocalDataSource;
 import com.example.mealsplanner.data.source.remote.auth.FirebaseAuthSource;
 import com.example.mealsplanner.data.source.remote.firestore.UserRemoteDataSource;
 import com.example.mealsplanner.util.ValidationUtil;
@@ -24,7 +26,8 @@ public class ForgetPasswordPresenter implements ForgetPasswordContract.Presenter
     public ForgetPasswordPresenter(Application app, ForgetPasswordContract.View view) {
         this.view = view;
         this.authRepository = new AuthRepository(new FirebaseAuthSource(app));
-        this.userRepository = new UserRepository(new UserRemoteDataSource());
+        this.userRepository = new UserRepository(new UserRemoteDataSource(),
+                new UserLocalDataSource(AppDatabase.getInstance(app).getUserDAO()));
     }
 
 

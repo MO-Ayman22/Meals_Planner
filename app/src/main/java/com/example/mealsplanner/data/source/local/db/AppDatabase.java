@@ -19,6 +19,8 @@ public abstract class AppDatabase extends RoomDatabase {
     private static final String DATABASE_NAME = "meals_planner_db";
     private static volatile AppDatabase INSTANCE;
 
+    public abstract UserDao getUserDAO();
+
     public static AppDatabase getInstance(Context context) {
         if (INSTANCE == null) {
             synchronized (AppDatabase.class) {
@@ -28,13 +30,10 @@ public abstract class AppDatabase extends RoomDatabase {
                                     AppDatabase.class,
                                     "DATABASE_NAME"
                             )
-                            .fallbackToDestructiveMigration()
                             .build();
                 }
             }
         }
         return INSTANCE;
     }
-
-    public abstract UserDao userDao();
 }

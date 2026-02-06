@@ -2,9 +2,13 @@ package com.example.mealsplanner.presentation.auth.login;
 
 import android.app.Application;
 
+import com.example.mealsplanner.core.BaseApplication;
+import com.example.mealsplanner.core.SessionManager;
 import com.example.mealsplanner.data.model.User;
 import com.example.mealsplanner.data.repository.AuthRepository;
 import com.example.mealsplanner.data.repository.UserRepository;
+import com.example.mealsplanner.data.source.local.db.AppDatabase;
+import com.example.mealsplanner.data.source.local.localsources.UserLocalDataSource;
 import com.example.mealsplanner.data.source.remote.auth.FirebaseAuthSource;
 import com.example.mealsplanner.data.source.remote.firestore.UserRemoteDataSource;
 import com.example.mealsplanner.util.ValidationUtil;
@@ -20,12 +24,15 @@ public class LoginPresenter implements LoginContract.Presenter {
     private final LoginContract.View view;
     private final AuthRepository authRepository;
     private final UserRepository userRepository;
+    private final SessionManager sessionManager;
     private final CompositeDisposable disposables = new CompositeDisposable();
 
     public LoginPresenter(Application app, LoginContract.View view) {
         this.view = view;
         this.authRepository = new AuthRepository(new FirebaseAuthSource(app));
-        this.userRepository = new UserRepository(new UserRemoteDataSource());
+        this.userRepository = new UserRepository(new UserRemoteDataSource(),
+                new UserLocalDataSource(AppDatabase.getInstance(app).getUserDAO()));
+        this.sessionManager = BaseApplication.getInstance().session();
     }
 
     @Override
@@ -60,6 +67,7 @@ public class LoginPresenter implements LoginContract.Presenter {
                 .subscribe(
                         firebaseUser -> {
                             view.hideLoginButtonLoading();
+                            sessionManager.saveLoginSession(firebaseUser.getUid());
                             view.onLoginSuccess();
                         },
                         throwable -> {
@@ -97,6 +105,7 @@ public class LoginPresenter implements LoginContract.Presenter {
                         .subscribe(
                                 user -> {
                                     view.hideGoogleButtonLoading();
+                                    sessionManager.saveLoginSession(user.getUid());
                                     view.onLoginSuccess();
                                 },
                                 throwable -> {

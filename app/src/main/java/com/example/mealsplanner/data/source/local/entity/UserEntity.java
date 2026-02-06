@@ -1,5 +1,6 @@
 package com.example.mealsplanner.data.source.local.entity;
 
+import androidx.annotation.NonNull;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
@@ -7,16 +8,18 @@ import androidx.room.PrimaryKey;
 public class UserEntity {
 
     @PrimaryKey
+    @NonNull
     private String uid;
     private String name;
     private String email;
 
 
+    @NonNull
     public String getUid() {
         return uid;
     }
 
-    public void setUid(String uid) {
+    public void setUid(@NonNull String uid) {
         this.uid = uid;
     }
 
