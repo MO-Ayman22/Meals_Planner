@@ -6,11 +6,11 @@
 
 
     <!-- Text colors -->
-    <color name="text_primary">#000000</color>
+    <color name="text_primary">#1A1A1A</color>
     <color name="text_secondary">#777777</color>
     <color name="text_hint">#99A1B0</color>
     <color name="text_special">#009966</color>
 
     <!-- Lines & borders -->
-    <color name="divider">#DDDDDD</color>
+    <color name="divider">#EEEEEE</color>
 </resources>

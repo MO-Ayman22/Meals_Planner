@@ -60,4 +60,5 @@ dependencies {
     implementation(libs.navigation.fragment.v297)
     implementation(libs.navigation.ui)
     implementation(libs.lottie)
+    implementation("de.hdodenhof:circleimageview:3.1.0")
 }

@@ -14,6 +14,13 @@
         <item name="buttonStyle">@style/ButtonStyle</item>
     </style>
 
+    <style name="App.FilterChip" parent="Widget.MaterialComponents.Chip.Choice">
+        <item name="chipBackgroundColor">@color/chip_bg_color</item>
+        <item name="android:textColor">@color/chip_text_color</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
     <style name="Theme.MealsPlanner" parent="Base.Theme.MealsPlanner" />
     <style name="FloatingActionButtonStyle" parent="Widget.MaterialComponents.FloatingActionButton">
         <item name="shapeAppearanceOverlay">@style/CustomFab</item>

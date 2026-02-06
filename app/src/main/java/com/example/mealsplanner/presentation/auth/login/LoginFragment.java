@@ -15,7 +15,7 @@ import androidx.navigation.fragment.NavHostFragment;
 
 import com.example.mealsplanner.R;
 import com.example.mealsplanner.databinding.FragmentLoginBinding;
-import com.example.mealsplanner.presentation.home.HomeActivity;
+import com.example.mealsplanner.presentation.main.MainActivity;
 
 public class LoginFragment extends Fragment implements LoginContract.View {
 
@@ -66,7 +66,7 @@ public class LoginFragment extends Fragment implements LoginContract.View {
 
     private void navigateToHome() {
         if (!isAdded()) return;
-        Intent intent = new Intent(requireContext(), HomeActivity.class);
+        Intent intent = new Intent(requireContext(), MainActivity.class);
         startActivity(intent);
         requireActivity().overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
         requireActivity().finish();
