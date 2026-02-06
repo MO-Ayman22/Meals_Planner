@@ -15,5 +15,7 @@ public interface ForgetPasswordContract {
 
     interface Presenter {
         void onResetPasswordClicked(String email);
+
+        void clear();
     }
 }

@@ -2,26 +2,31 @@ package com.example.mealsplanner.presentation.auth.register;
 
 import android.app.Application;
 
-import androidx.annotation.NonNull;
-
 import com.example.mealsplanner.data.model.User;
 import com.example.mealsplanner.data.repository.AuthRepository;
 import com.example.mealsplanner.data.repository.UserRepository;
 import com.example.mealsplanner.data.source.remote.auth.FirebaseAuthSource;
 import com.example.mealsplanner.data.source.remote.firestore.FirebaseFirestoreSource;
 import com.example.mealsplanner.util.ValidationUtil;
-import com.google.firebase.auth.FirebaseUser;
+
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
+import io.reactivex.rxjava3.core.Single;
+import io.reactivex.rxjava3.disposables.CompositeDisposable;
+import io.reactivex.rxjava3.disposables.Disposable;
+import io.reactivex.rxjava3.schedulers.Schedulers;
 
 public class RegisterPresenter implements RegisterContract.Presenter {
     private final RegisterContract.View view;
     private final AuthRepository authRepository;
-
     private final UserRepository userRepository;
+
+    private final CompositeDisposable disposables = new CompositeDisposable();
+
 
     public RegisterPresenter(Application app, RegisterContract.View view) {
         this.view = view;
-        this.authRepository = new AuthRepository(app);
-        this.userRepository = new UserRepository();
+        this.authRepository = new AuthRepository(new FirebaseAuthSource(app));
+        this.userRepository = new UserRepository(new FirebaseFirestoreSource());
     }
 
     @Override
@@ -29,24 +34,77 @@ public class RegisterPresenter implements RegisterContract.Presenter {
         view.showRegisterButtonLoading();
         if (!validateInputs(name, email, password, confirmPassword, isChecked)) return;
 
-        userRepository.existsByEmail(email, new FirebaseFirestoreSource.ExistsCallback() {
-            @Override
-            public void onResult(boolean exists) {
+        Disposable disposable = userRepository.existsByEmail(email).subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(
+                        exists -> {
+                            if (exists) {
+                                view.hideRegisterButtonLoading();
+                                view.showEmailError("Email already exists");
+                            } else {
+                                register(name, email, password);
+                            }
+                        },
+                        throwable -> {
+                            view.hideRegisterButtonLoading();
+                            view.onRegisterError(throwable.getMessage());
 
-                if (exists) {
-                    view.hideRegisterButtonLoading();
-                    view.showEmailError("Email already exists");
-                } else {
-                    register(name, email, password);
-                }
-            }
+                        });
 
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                view.hideRegisterButtonLoading();
-                view.onRegisterError(e.getMessage());
-            }
-        });
+        disposables.add(disposable);
+    }
+
+    private void register(String name, String email, String password) {
+        Disposable disposable = authRepository.register(email, password, name)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(
+                        firebaseUser -> {
+                            view.hideRegisterButtonLoading();
+                            view.onRegisterSuccess();
+                        }
+                        , throwable -> {
+                            view.hideRegisterButtonLoading();
+                            view.onRegisterError(throwable.getMessage());
+                        });
+    }
+
+    @Override
+    public void onGoogleLoginClicked() {
+        view.showGoogleButtonLoading();
+
+        Disposable d =
+                authRepository.loginWithGoogle()
+                        .subscribeOn(Schedulers.io())
+                        .flatMap(firebaseUser ->
+                                userRepository.exists(firebaseUser.getUid())
+                                        .flatMap(exists -> {
+                                            if (exists) {
+                                                return Single.just(firebaseUser);
+                                            } else {
+                                                User user = new User(
+                                                        firebaseUser.getUid(),
+                                                        firebaseUser.getDisplayName(),
+                                                        firebaseUser.getEmail()
+                                                );
+                                                return userRepository.create(user)
+                                                        .andThen(Single.just(firebaseUser));
+                                            }
+                                        })
+                        )
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribe(
+                                user -> {
+                                    view.hideGoogleButtonLoading();
+                                    view.onRegisterSuccess();
+                                },
+                                throwable -> {
+                                    view.hideGoogleButtonLoading();
+                                    view.onRegisterError(throwable.getMessage());
+                                }
+                        );
+
+        disposables.add(d);
     }
 
     private boolean validateInputs(String name, String email, String password, String confirmPassword, boolean isChecked) {
@@ -88,85 +146,9 @@ public class RegisterPresenter implements RegisterContract.Presenter {
         return true;
     }
 
-    private void register(String name, String email, String password) {
-        authRepository.register(email, password, name, new FirebaseAuthSource.AuthCallback() {
-
-            @Override
-            public void onSuccess(FirebaseUser user) {
-                User newUser = new User(user.getUid(), name, email);
-                createUser(newUser);
-            }
-
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                view.hideRegisterButtonLoading();
-                view.onRegisterError(e.getMessage());
-            }
-
-            @Override
-            public void onCancelled() {
-                view.hideRegisterButtonLoading();
-                view.onRegisterError("Something went wrong");
-            }
-        });
-    }
-
     @Override
-    public void onGoogleLoginClicked() {
-        view.showGoogleButtonLoading();
-        authRepository.loginWithGoogle(new FirebaseAuthSource.AuthCallback() {
-            @Override
-            public void onSuccess(FirebaseUser firebaseUser) {
-
-                userRepository.exists(firebaseUser.getUid(), new FirebaseFirestoreSource.ExistsCallback() {
-                    @Override
-                    public void onResult(boolean exists) {
-
-                        if (exists) {
-                            view.hideGoogleButtonLoading();
-                            view.onRegisterSuccess();
-                        } else {
-                            User user = new User(firebaseUser.getUid(), firebaseUser.getDisplayName(), firebaseUser.getEmail());
-                            createUser(user);
-                        }
-                    }
-
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        view.hideGoogleButtonLoading();
-                        view.onRegisterError(e.getMessage());
-                    }
-                });
-            }
-
-            @Override
-            public void onFailure(Exception e) {
-                view.hideGoogleButtonLoading();
-                view.onRegisterError(e.getMessage());
-            }
-
-            @Override
-            public void onCancelled() {
-                view.hideGoogleButtonLoading();
-            }
-        });
-    }
-
-
-    private void createUser(User user) {
-        userRepository.create(user, new FirebaseFirestoreSource.FirestoreCallback() {
-            @Override
-            public void onSuccess() {
-                view.hideGoogleButtonLoading();
-                view.onRegisterSuccess();
-            }
-
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                view.hideGoogleButtonLoading();
-                view.onRegisterError(e.getMessage());
-            }
-        });
+    public void clear() {
+        disposables.clear();
     }
 
 }

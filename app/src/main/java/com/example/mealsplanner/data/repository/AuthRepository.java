@@ -1,33 +1,32 @@
 package com.example.mealsplanner.data.repository;
 
-import android.app.Application;
-
 import com.example.mealsplanner.data.source.remote.auth.FirebaseAuthSource;
+import com.google.firebase.auth.FirebaseUser;
+
+import io.reactivex.rxjava3.core.Completable;
+import io.reactivex.rxjava3.core.Single;
 
 public class AuthRepository {
 
     private final FirebaseAuthSource authSource;
 
-    public AuthRepository(Application app) {
-        authSource = new FirebaseAuthSource(app);
+    public AuthRepository(FirebaseAuthSource authSource) {
+        this.authSource = authSource;
     }
 
-    public void loginWithEmail(String email, String password,
-                               FirebaseAuthSource.AuthCallback callback) {
-        authSource.signInWithEmail(email, password, callback);
+    public Single<FirebaseUser> loginWithEmail(String email, String password) {
+        return authSource.signInWithEmail(email, password);
     }
 
-    public void loginWithGoogle(FirebaseAuthSource.AuthCallback callback) {
-        authSource.signInWithGoogle(callback);
+    public Single<FirebaseUser> loginWithGoogle() {
+        return authSource.signInWithGoogle();
     }
 
-    public void register(String email, String password, String name,
-                         FirebaseAuthSource.AuthCallback callback) {
-        authSource.register(email, password, name, callback);
+    public Single<FirebaseUser> register(String email, String password, String name) {
+        return authSource.register(email, password, name);
     }
 
-    public void resetPassword(String email,
-                              FirebaseAuthSource.AuthCallback callback) {
-        authSource.resetPassword(email, callback);
+    public Completable resetPassword(String email) {
+        return authSource.resetPassword(email);
     }
 }

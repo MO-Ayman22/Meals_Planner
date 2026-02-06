@@ -137,4 +137,10 @@ public class RegisterFragment extends Fragment implements RegisterContract.View 
         requireActivity().finish();
 
     }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        presenter.clear();
+    }
 }

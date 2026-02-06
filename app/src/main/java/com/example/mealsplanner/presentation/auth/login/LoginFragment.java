@@ -125,4 +125,10 @@ public class LoginFragment extends Fragment implements LoginContract.View {
     public void onLoginError(String message) {
         Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show();
     }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        presenter.clear();
+    }
 }

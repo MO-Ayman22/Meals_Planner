@@ -28,6 +28,8 @@ public interface LoginContract {
         void onGoogleLoginClicked();
 
         void onLoginClicked(String email, String password);
+
+        void clear();
     }
 }
 

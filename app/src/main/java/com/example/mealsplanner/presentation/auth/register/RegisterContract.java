@@ -30,5 +30,7 @@ public interface RegisterContract {
         void onGoogleLoginClicked();
 
         void onRegisterClicked(String name, String email, String password, String confirmPassword, boolean isChecked);
+
+        void clear();
     }
 }

@@ -48,4 +48,3 @@ core-splashscreen = { group = "androidx.core", name = "core-splashscreen", versi
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
 google-gms-google-services = { id = "com.google.gms.google-services", version.ref = "googleGmsGoogleServices" }
-navigation-safeargs = { id = "androidx.navigation.safeargs.gradle.plugin", version.ref = "navigationSafeargs" }

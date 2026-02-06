@@ -5,26 +5,26 @@ import androidx.annotation.NonNull;
 import com.example.mealsplanner.data.model.User;
 import com.example.mealsplanner.data.source.remote.firestore.FirebaseFirestoreSource;
 
+import io.reactivex.rxjava3.core.Completable;
+import io.reactivex.rxjava3.core.Single;
+
 public class UserRepository {
 
     private final FirebaseFirestoreSource firestoreSource;
 
-    public UserRepository() {
-        firestoreSource = new FirebaseFirestoreSource();
+    public UserRepository(FirebaseFirestoreSource firestoreSource) {
+        this.firestoreSource = firestoreSource;
     }
 
-    public void create(@NonNull User user,
-                       @NonNull FirebaseFirestoreSource.FirestoreCallback callback) {
-        firestoreSource.createUser(user, callback);
+    public Completable create(@NonNull User user) {
+        return firestoreSource.createUser(user);
     }
 
-    public void exists(@NonNull String uid,
-                       @NonNull FirebaseFirestoreSource.ExistsCallback callback) {
-        firestoreSource.exists(uid, callback);
+    public Single<Boolean> exists(@NonNull String uid) {
+        return firestoreSource.exists(uid);
     }
 
-    public void existsByEmail(@NonNull String email,
-                              @NonNull FirebaseFirestoreSource.ExistsCallback callback) {
-        firestoreSource.existsByEmail(email, callback);
+    public Single<Boolean> existsByEmail(@NonNull String email) {
+        return firestoreSource.existsByEmail(email);
     }
 }

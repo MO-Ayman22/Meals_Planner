@@ -2,6 +2,7 @@ package com.example.mealsplanner.data.source.remote.auth;
 
 import static com.google.android.libraries.identity.googleid.GoogleIdTokenCredential.TYPE_GOOGLE_ID_TOKEN_CREDENTIAL;
 
+import android.annotation.SuppressLint;
 import android.app.Application;
 import android.os.CancellationSignal;
 
@@ -25,6 +26,9 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
 import com.google.firebase.auth.UserProfileChangeRequest;
 
+import io.reactivex.rxjava3.core.Completable;
+import io.reactivex.rxjava3.core.Single;
+
 public class FirebaseAuthSource {
 
     private final FirebaseAuth auth;
@@ -42,81 +46,114 @@ public class FirebaseAuthSource {
         credentialRequest = new GetCredentialRequest.Builder().addCredentialOption(googleIdOption).build();
     }
 
-    public void signInWithGoogle(@NonNull AuthCallback callback) {
-        credentialManager.getCredentialAsync(app, credentialRequest, new CancellationSignal(), ContextCompat.getMainExecutor(app), new CredentialManagerCallback<>() {
+    public Single<FirebaseUser> signInWithGoogle() {
+        return Single.create(emitter -> {
+            credentialManager.getCredentialAsync(
+                    app,
+                    credentialRequest,
+                    new CancellationSignal(),
+                    ContextCompat.getMainExecutor(app),
+                    new CredentialManagerCallback<>() {
+                        @SuppressLint("CheckResult")
+                        @Override
+                        public void onResult(GetCredentialResponse result) {
+                            try {
+                                handleGoogleCredential(result.getCredential())
+                                        .subscribe(emitter::onSuccess, emitter::onError);
+                            } catch (Exception e) {
+                                emitter.onError(e);
+                            }
+                        }
 
-            @Override
-            public void onResult(GetCredentialResponse result) {
-                handleGoogleCredential(result.getCredential(), callback);
-            }
-
-            @Override
-            public void onError(@NonNull GetCredentialException e) {
-                if (e instanceof GetCredentialCancellationException) callback.onCancelled();
-                else callback.onFailure(e);
-            }
+                        @Override
+                        public void onError(@NonNull GetCredentialException e) {
+                            if (e instanceof GetCredentialCancellationException) {
+                                emitter.onError(new Exception("Cancelled by user"));
+                            } else {
+                                emitter.onError(e);
+                            }
+                        }
+                    }
+            );
         });
     }
 
-    private void handleGoogleCredential(@NonNull Credential credential, @NonNull AuthCallback callback) {
+    private Single<FirebaseUser> handleGoogleCredential(@NonNull Credential credential) {
+        return Single.create(emitter -> {
 
-        if (!(credential instanceof CustomCredential customCredential) || !TYPE_GOOGLE_ID_TOKEN_CREDENTIAL.equals(customCredential.getType())) {
-            callback.onFailure(new IllegalStateException("Invalid Google credential"));
-            return;
-        }
-
-        GoogleIdTokenCredential googleCred = GoogleIdTokenCredential.createFrom(customCredential.getData());
-
-        AuthCredential firebaseCred = GoogleAuthProvider.getCredential(googleCred.getIdToken(), null);
-
-        auth.signInWithCredential(firebaseCred).addOnCompleteListener(task -> {
-            if (task.isSuccessful()) callback.onSuccess(auth.getCurrentUser());
-            else callback.onFailure(task.getException());
-        });
-    }
-
-    public void signInWithEmail(String email, String password, @NonNull AuthCallback callback) {
-
-        auth.signInWithEmailAndPassword(email, password).addOnCompleteListener(task -> {
-            if (task.isSuccessful()) callback.onSuccess(auth.getCurrentUser());
-            else callback.onFailure(task.getException());
-        });
-    }
-
-    public void register(String email, String password, String name, @NonNull AuthCallback callback) {
-
-        auth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(task -> {
-            if (!task.isSuccessful()) {
-                callback.onFailure(task.getException());
+            if (!(credential instanceof CustomCredential customCredential) ||
+                    !TYPE_GOOGLE_ID_TOKEN_CREDENTIAL.equals(customCredential.getType())) {
+                emitter.onError(new IllegalStateException("Invalid Google credential"));
                 return;
             }
 
-            FirebaseUser user = auth.getCurrentUser();
-            if (user == null) {
-                callback.onFailure(new IllegalStateException("User is null"));
-                return;
-            }
+            GoogleIdTokenCredential googleCred = GoogleIdTokenCredential.createFrom(customCredential.getData());
 
-            user.updateProfile(new UserProfileChangeRequest.Builder().setDisplayName(name).build()).addOnCompleteListener(updateTask -> {
-                if (updateTask.isSuccessful()) callback.onSuccess(user);
-                else callback.onFailure(updateTask.getException());
-            });
+            AuthCredential firebaseCred = GoogleAuthProvider.getCredential(googleCred.getIdToken(), null);
+
+            auth.signInWithCredential(firebaseCred)
+                    .addOnCompleteListener(task -> {
+                        if (task.isSuccessful() && auth.getCurrentUser() != null) {
+                            emitter.onSuccess(auth.getCurrentUser());
+                        } else {
+                            emitter.onError(task.getException() != null
+                                    ? task.getException()
+                                    : new IllegalStateException("Sign-in failed"));
+                        }
+                    });
         });
     }
 
-    public void resetPassword(String email, @NonNull AuthCallback callback) {
-        auth.sendPasswordResetEmail(email).addOnCompleteListener(task -> {
-            if (task.isSuccessful()) callback.onSuccess(null);
-            else callback.onFailure(task.getException());
-        });
+
+    public Single<FirebaseUser> signInWithEmail(String email, String password) {
+        return Single.create(emitter ->
+                auth.signInWithEmailAndPassword(email, password)
+                        .addOnCompleteListener(task -> {
+                            if (task.isSuccessful() && auth.getCurrentUser() != null) {
+                                emitter.onSuccess(auth.getCurrentUser());
+                            } else {
+                                emitter.onError(task.getException() != null
+                                        ? task.getException()
+                                        : new IllegalStateException("Sign-in failed"));
+                            }
+                        })
+        );
     }
 
-    public interface AuthCallback {
-        void onSuccess(FirebaseUser user);
+    public Single<FirebaseUser> register(String email, String password, String name) {
+        return Single.create(emitter ->
+                auth.createUserWithEmailAndPassword(email, password)
+                        .addOnCompleteListener(task -> {
+                            if (!task.isSuccessful()) {
+                                emitter.onError(task.getException());
+                                return;
+                            }
 
-        void onFailure(@NonNull Exception e);
+                            FirebaseUser user = auth.getCurrentUser();
+                            if (user == null) {
+                                emitter.onError(new IllegalStateException("User is null"));
+                                return;
+                            }
 
-        void onCancelled();
+                            user.updateProfile(new UserProfileChangeRequest.Builder()
+                                            .setDisplayName(name).build())
+                                    .addOnCompleteListener(updateTask -> {
+                                        if (updateTask.isSuccessful()) emitter.onSuccess(user);
+                                        else emitter.onError(updateTask.getException());
+                                    });
+                        })
+        );
+    }
+
+
+    public Completable resetPassword(String email) {
+        return Completable.create(emitter ->
+                auth.sendPasswordResetEmail(email)
+                        .addOnCompleteListener(task -> {
+                            if (task.isSuccessful()) emitter.onComplete();
+                            else emitter.onError(task.getException());
+                        })
+        );
     }
 
 }

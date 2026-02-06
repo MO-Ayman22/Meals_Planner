@@ -108,4 +108,10 @@ public class ForgetPasswordFragment extends Fragment implements ForgetPasswordCo
     public void onResetPasswordError(String message) {
         Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show();
     }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        presenter.clear();
+    }
 }
