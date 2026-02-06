@@ -52,11 +52,11 @@
                     android:layout_width="64dp"
                     android:layout_height="64dp"
                     android:src="@drawable/ic_person"
-                    android:tint="@color/white"
                     app:layout_constraintBottom_toBottomOf="@+id/imgProfile"
                     app:layout_constraintEnd_toEndOf="@+id/imgProfile"
                     app:layout_constraintStart_toStartOf="@+id/imgProfile"
-                    app:layout_constraintTop_toTopOf="@+id/imgProfile" />
+                    app:layout_constraintTop_toTopOf="@+id/imgProfile"
+                    app:tint="@color/white" />
 
                 <ImageButton
                     android:id="@+id/butEditImage"
@@ -113,7 +113,6 @@
             app:layout_constraintBottom_toTopOf="@+id/materialCardView2"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
-        <?xml version="1.0" encoding="utf-8"?>
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/materialCardView3"
             android:layout_width="match_parent"
@@ -137,7 +136,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="8dp"
-                    android:text="Preferences"
+                    android:text="@string/preferences"
                     android:textColor="@color/text_primary"
                     android:textSize="18sp"
                     app:layout_constraintStart_toStartOf="parent"
@@ -153,207 +152,203 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/tvPreferences" />
 
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="0dp"
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
+                    android:orientation="vertical"
                     app:layout_constraintTop_toBottomOf="@id/view4">
 
+                    <!-- ================= Theme ================= -->
                     <LinearLayout
+                        android:id="@+id/ll_theme"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical">
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal"
+                        android:padding="16dp">
 
-                        <!-- ================= Theme ================= -->
-                        <LinearLayout
-                            android:id="@+id/ll_theme"
-                            android:layout_width="match_parent"
+                        <com.google.android.material.card.MaterialCardView
+                            android:id="@+id/themeCard"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:clickable="true"
-                            android:focusable="true"
-                            android:gravity="center_vertical"
-                            android:orientation="horizontal"
-                            android:padding="16dp">
+                            android:backgroundTint="#dbebff"
+                            app:cardCornerRadius="8dp"
+                            app:strokeWidth="0dp">
 
-                            <com.google.android.material.card.MaterialCardView
-                                android:id="@+id/materialCardView"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:backgroundTint="#dbebff"
-                                app:cardCornerRadius="8dp"
-                                app:strokeWidth="0dp">
-
-                                <ImageView
-                                    android:layout_width="32dp"
-                                    android:layout_height="32dp"
-                                    android:layout_margin="4dp"
-                                    android:src="@drawable/chicken" />
-                            </com.google.android.material.card.MaterialCardView>
-
-
-                            <!-- Text -->
-                            <LinearLayout
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_marginStart="12dp"
-                                android:layout_weight="1"
-                                android:orientation="vertical">
-
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="Theme"
-                                    android:textColor="@color/text_primary"
-                                    android:textSize="16sp" />
-
-                                <TextView
-                                    android:id="@+id/tv_theme_value"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="Light Mode"
-                                    android:textColor="@color/text_secondary"
-                                    android:textSize="13sp" />
-                            </LinearLayout>
-
-                            <ImageButton
-                                android:layout_width="16dp"
-                                android:layout_height="16dp"
-                                android:background="@android:color/transparent"
-                                android:src="@drawable/ic_arrow_forward_ios"
-                                android:tint="#ddd" />
-                        </LinearLayout>
-
-
-                        <View
-                            android:layout_width="match_parent"
-                            android:layout_height="1dp"
-                            android:layout_marginHorizontal="8dp"
-                            android:background="@color/divider" />
-
-                        <!-- ================= Language ================= -->
-                        <LinearLayout
-                            android:id="@+id/ll_language"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:clickable="true"
-                            android:focusable="true"
-                            android:gravity="center_vertical"
-                            android:orientation="horizontal"
-                            android:padding="16dp">
-
-                            <com.google.android.material.card.MaterialCardView
-                                android:id="@+id/materialCardView"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:backgroundTint="#dbebff"
-                                app:cardCornerRadius="8dp"
-                                app:strokeWidth="0dp">
-
-                                <ImageView
-                                    android:layout_width="32dp"
-                                    android:layout_height="32dp"
-                                    android:layout_margin="4dp"
-                                    android:src="@drawable/chicken" />
-                            </com.google.android.material.card.MaterialCardView>
-
-
-                            <LinearLayout
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_marginStart="12dp"
-                                android:layout_weight="1"
-                                android:orientation="vertical">
-
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="Language"
-                                    android:textColor="@color/text_primary"
-                                    android:textSize="16sp" />
-
-                                <TextView
-                                    android:id="@+id/tv_language_value"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="English"
-                                    android:textColor="@color/text_secondary"
-                                    android:textSize="13sp" />
-                            </LinearLayout>
-
-                            <ImageButton
-                                android:layout_width="16dp"
-                                android:layout_height="16dp"
-                                android:background="@android:color/transparent"
-                                android:src="@drawable/ic_arrow_forward_ios"
-                                android:tint="#ddd" />
-                        </LinearLayout>
-
-                        <View
-                            android:layout_width="match_parent"
-                            android:layout_height="1dp"
-                            android:layout_marginHorizontal="8dp"
-                            android:background="@color/divider" />
-
-                        <LinearLayout
-                            android:id="@+id/ll_notifications"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:gravity="center_vertical"
-                            android:orientation="horizontal"
-                            android:padding="16dp">
-
-                            <com.google.android.material.card.MaterialCardView
-                                android:id="@+id/materialCardView"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:backgroundTint="#dbebff"
-                                app:cardCornerRadius="8dp"
-                                app:strokeWidth="0dp">
-
-                                <ImageView
-                                    android:layout_width="32dp"
-                                    android:layout_height="32dp"
-                                    android:layout_margin="4dp"
-                                    android:src="@drawable/chicken" />
-                            </com.google.android.material.card.MaterialCardView>
-
-
-                            <LinearLayout
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_marginStart="12dp"
-                                android:layout_weight="1"
-                                android:orientation="vertical">
-
-                                <TextView
-
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="Notifications"
-                                    android:textColor="@color/text_primary"
-                                    android:textSize="16sp" />
-
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="Push notifications"
-                                    android:textColor="@color/text_secondary"
-                                    android:textSize="13sp" />
-                            </LinearLayout>
-
-                            <com.google.android.material.switchmaterial.SwitchMaterial
-                                android:id="@+id/switch_notifications"
-                                android:layout_width="wrap_content"
+                            <ImageView
+                                android:id="@+id/themeImage"
+                                android:layout_width="32dp"
                                 android:layout_height="32dp"
-                                android:checked="true"
-                                app:thumbTint="@color/primary"
-                                app:trackTint="@color/primary" />
+                                android:layout_margin="4dp"
+                                android:src="@drawable/chicken" />
+                        </com.google.android.material.card.MaterialCardView>
+
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="12dp"
+                            android:layout_weight="1"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/theme"
+                                android:textColor="@color/text_primary"
+                                android:textSize="16sp" />
+
+                            <TextView
+                                android:id="@+id/tv_theme_value"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/light_mode"
+                                android:textColor="@color/text_secondary"
+                                android:textSize="13sp" />
                         </LinearLayout>
 
+                        <ImageButton
+                            android:layout_width="16dp"
+                            android:layout_height="16dp"
+                            android:background="@android:color/transparent"
+                            android:src="@drawable/ic_arrow_forward_ios"
+                            app:tint="#ddd" />
                     </LinearLayout>
-                </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginHorizontal="8dp"
+                        android:background="@color/divider" />
+
+                    <!-- ================= Language ================= -->
+                    <LinearLayout
+                        android:id="@+id/ll_language"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal"
+                        android:padding="16dp">
+
+                        <com.google.android.material.card.MaterialCardView
+                            android:id="@+id/languageCard"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:backgroundTint="#dbebff"
+                            app:cardCornerRadius="8dp"
+                            app:strokeWidth="0dp">
+
+                            <ImageView
+                                android:id="@+id/languageImage"
+                                android:layout_width="32dp"
+                                android:layout_height="32dp"
+                                android:layout_margin="4dp"
+                                android:src="@drawable/chicken" />
+                        </com.google.android.material.card.MaterialCardView>
+
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="12dp"
+                            android:layout_weight="1"
+                            android:orientation="vertical">
+
+                            <TextView
+
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Language"
+                                android:textColor="@color/text_primary"
+                                android:textSize="16sp" />
+
+                            <TextView
+                                android:id="@+id/tv_language_value"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="English"
+                                android:textColor="@color/text_secondary"
+                                android:textSize="13sp" />
+                        </LinearLayout>
+
+                        <ImageButton
+                            android:layout_width="16dp"
+                            android:layout_height="16dp"
+                            android:background="@android:color/transparent"
+                            android:src="@drawable/ic_arrow_forward_ios"
+                            app:tint="#ddd" />
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginHorizontal="8dp"
+                        android:background="@color/divider" />
+
+                    <LinearLayout
+                        android:id="@+id/ll_notifications"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal"
+                        android:padding="16dp">
+
+                        <com.google.android.material.card.MaterialCardView
+                            android:id="@+id/notificationCard"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:backgroundTint="#dbebff"
+                            app:cardCornerRadius="8dp"
+                            app:strokeWidth="0dp">
+
+                            <ImageView
+                                android:id="@+id/notificationImage"
+                                android:layout_width="32dp"
+                                android:layout_height="32dp"
+                                android:layout_margin="4dp"
+                                android:src="@drawable/chicken" />
+                        </com.google.android.material.card.MaterialCardView>
+
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="12dp"
+                            android:layout_weight="1"
+                            android:orientation="vertical">
+
+                            <TextView
+
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Notifications"
+                                android:textColor="@color/text_primary"
+                                android:textSize="16sp" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Push notifications"
+                                android:textColor="@color/text_secondary"
+                                android:textSize="13sp" />
+                        </LinearLayout>
+
+                        <com.google.android.material.switchmaterial.SwitchMaterial
+                            android:id="@+id/switch_notifications"
+                            android:layout_width="wrap_content"
+                            android:layout_height="32dp"
+                            android:checked="true"
+                            app:thumbTint="@color/primary"
+                            app:trackTint="@color/primary" />
+                    </LinearLayout>
+
+                </LinearLayout>
+
             </androidx.constraintlayout.widget.ConstraintLayout>
 
         </com.google.android.material.card.MaterialCardView>
@@ -380,14 +375,14 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="8dp"
-                    android:text="Preferences"
+                    android:text="@string/other"
                     android:textColor="@color/text_primary"
                     android:textSize="18sp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <View
-                    android:id="@+id/view4"
+                    android:id="@+id/view5"
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
                     android:layout_margin="8dp"
@@ -396,186 +391,177 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/tvOther" />
 
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="0dp"
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
+                    android:orientation="vertical"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/view4">
+                    app:layout_constraintTop_toBottomOf="@+id/view5">
+
+                    <!-- ================= Theme ================= -->
+                    <LinearLayout
+                        android:id="@+id/ll_privacy"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal"
+                        android:padding="16dp">
+
+                        <com.google.android.material.card.MaterialCardView
+                            android:id="@+id/PrivacyCard"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:backgroundTint="#dbebff"
+                            app:cardCornerRadius="8dp"
+                            app:strokeWidth="0dp">
+
+                            <ImageView
+                                android:id="@+id/privacyImage"
+                                android:layout_width="32dp"
+                                android:layout_height="32dp"
+                                android:layout_margin="4dp"
+                                android:src="@drawable/chicken" />
+                        </com.google.android.material.card.MaterialCardView>
+
+
+                        <!-- Text -->
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="12dp"
+                            android:layout_weight="1"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/privacy_policy"
+                                android:textColor="@color/text_primary"
+                                android:textSize="16sp" />
+
+
+                        </LinearLayout>
+
+                        <ImageButton
+                            android:layout_width="16dp"
+                            android:layout_height="16dp"
+                            android:background="@android:color/transparent"
+                            android:src="@drawable/ic_arrow_forward_ios"
+                            app:tint="#ddd" />
+                    </LinearLayout>
+
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginHorizontal="8dp"
+                        android:background="@color/divider" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical">
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal"
+                        android:padding="16dp">
 
-                        <!-- ================= Theme ================= -->
-                        <LinearLayout
-                            android:id="@+id/ll_theme"
-                            android:layout_width="match_parent"
+                        <com.google.android.material.card.MaterialCardView
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:clickable="true"
-                            android:focusable="true"
-                            android:gravity="center_vertical"
-                            android:orientation="horizontal"
-                            android:padding="16dp">
+                            android:backgroundTint="#dbebff"
+                            app:cardCornerRadius="8dp"
+                            app:strokeWidth="0dp">
 
-                            <com.google.android.material.card.MaterialCardView
-                                android:id="@+id/materialCardView"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:backgroundTint="#dbebff"
-                                app:cardCornerRadius="8dp"
-                                app:strokeWidth="0dp">
+                            <ImageView
+                                android:layout_width="32dp"
+                                android:layout_height="32dp"
+                                android:layout_margin="4dp"
+                                android:src="@drawable/chicken" />
+                        </com.google.android.material.card.MaterialCardView>
 
-                                <ImageView
-                                    android:layout_width="32dp"
-                                    android:layout_height="32dp"
-                                    android:layout_margin="4dp"
-                                    android:src="@drawable/chicken" />
-                            </com.google.android.material.card.MaterialCardView>
-
-
-                            <!-- Text -->
-                            <LinearLayout
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_marginStart="12dp"
-                                android:layout_weight="1"
-                                android:orientation="vertical">
-
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="Privacy Policy"
-                                    android:textColor="@color/text_primary"
-                                    android:textSize="16sp" />
-
-
-                            </LinearLayout>
-
-                            <ImageButton
-                                android:layout_width="16dp"
-                                android:layout_height="16dp"
-                                android:background="@android:color/transparent"
-                                android:src="@drawable/ic_arrow_forward_ios"
-                                android:tint="#ddd" />
-                        </LinearLayout>
-
-
-                        <View
-                            android:layout_width="match_parent"
-                            android:layout_height="1dp"
-                            android:layout_marginHorizontal="8dp"
-                            android:background="@color/divider" />
-
-                        <!-- ================= Language ================= -->
-                        <LinearLayout
-                            android:id="@+id/ll_language"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:clickable="true"
-                            android:focusable="true"
-                            android:gravity="center_vertical"
-                            android:orientation="horizontal"
-                            android:padding="16dp">
-
-                            <com.google.android.material.card.MaterialCardView
-                                android:id="@+id/materialCardView"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:backgroundTint="#dbebff"
-                                app:cardCornerRadius="8dp"
-                                app:strokeWidth="0dp">
-
-                                <ImageView
-                                    android:layout_width="32dp"
-                                    android:layout_height="32dp"
-                                    android:layout_margin="4dp"
-                                    android:src="@drawable/chicken" />
-                            </com.google.android.material.card.MaterialCardView>
-
-
-                            <LinearLayout
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_marginStart="12dp"
-                                android:layout_weight="1"
-                                android:orientation="vertical">
-
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="Terms of Service"
-                                    android:textColor="@color/text_primary"
-                                    android:textSize="16sp" />
-                            </LinearLayout>
-
-                            <ImageButton
-                                android:layout_width="16dp"
-                                android:layout_height="16dp"
-                                android:background="@android:color/transparent"
-                                android:src="@drawable/ic_arrow_forward_ios"
-                                android:tint="#ddd" />
-                        </LinearLayout>
-
-                        <View
-                            android:layout_width="match_parent"
-                            android:layout_height="1dp"
-                            android:layout_marginHorizontal="8dp"
-                            android:background="@color/divider" />
 
                         <LinearLayout
-                            android:id="@+id/ll_notifications"
-                            android:layout_width="match_parent"
+                            android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:gravity="center_vertical"
-                            android:orientation="horizontal"
-                            android:padding="16dp">
+                            android:layout_marginStart="12dp"
+                            android:layout_weight="1"
+                            android:orientation="vertical">
 
-                            <com.google.android.material.card.MaterialCardView
-                                android:id="@+id/materialCardView"
+                            <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:backgroundTint="#dbebff"
-                                app:cardCornerRadius="8dp"
-                                app:strokeWidth="0dp">
-
-                                <ImageView
-                                    android:layout_width="32dp"
-                                    android:layout_height="32dp"
-                                    android:layout_margin="4dp"
-                                    android:src="@drawable/chicken" />
-                            </com.google.android.material.card.MaterialCardView>
-
-
-                            <LinearLayout
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_marginStart="12dp"
-                                android:layout_weight="1"
-                                android:orientation="vertical">
-
-                                <TextView
-
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="Help &amp; Support"
-                                    android:textColor="@color/text_primary"
-                                    android:textSize="16sp" />
-
-                            </LinearLayout>
-
-                            <ImageButton
-                                android:layout_width="16dp"
-                                android:layout_height="16dp"
-                                android:background="@android:color/transparent"
-                                android:src="@drawable/ic_arrow_forward_ios"
-                                android:tint="#ddd" />
+                                android:text="@string/terms_of_service"
+                                android:textColor="@color/text_primary"
+                                android:textSize="16sp" />
                         </LinearLayout>
 
+                        <ImageButton
+                            android:layout_width="16dp"
+                            android:layout_height="16dp"
+                            android:background="@android:color/transparent"
+                            android:src="@drawable/ic_arrow_forward_ios"
+                            app:tint="#ddd" />
                     </LinearLayout>
-                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginHorizontal="8dp"
+                        android:background="@color/divider" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal"
+                        android:padding="16dp">
+
+                        <com.google.android.material.card.MaterialCardView
+                            android:id="@+id/materialCardView"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:backgroundTint="#dbebff"
+                            app:cardCornerRadius="8dp"
+                            app:strokeWidth="0dp">
+
+                            <ImageView
+                                android:layout_width="32dp"
+                                android:layout_height="32dp"
+                                android:layout_margin="4dp"
+                                android:src="@drawable/chicken" />
+                        </com.google.android.material.card.MaterialCardView>
+
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="12dp"
+                            android:layout_weight="1"
+                            android:orientation="vertical">
+
+                            <TextView
+
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Help &amp; Support"
+                                android:textColor="@color/text_primary"
+                                android:textSize="16sp" />
+
+                        </LinearLayout>
+
+                        <ImageButton
+                            android:layout_width="16dp"
+                            android:layout_height="16dp"
+                            android:background="@android:color/transparent"
+                            android:src="@drawable/ic_arrow_forward_ios"
+                            app:tint="#ddd" />
+                    </LinearLayout>
+
+                </LinearLayout>
             </androidx.constraintlayout.widget.ConstraintLayout>
 
         </com.google.android.material.card.MaterialCardView>
