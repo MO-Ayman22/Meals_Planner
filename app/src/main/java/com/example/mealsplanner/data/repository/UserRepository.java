@@ -3,16 +3,16 @@ package com.example.mealsplanner.data.repository;
 import androidx.annotation.NonNull;
 
 import com.example.mealsplanner.data.model.User;
-import com.example.mealsplanner.data.source.remote.firestore.FirebaseFirestoreSource;
+import com.example.mealsplanner.data.source.remote.firestore.UserRemoteDataSource;
 
 import io.reactivex.rxjava3.core.Completable;
 import io.reactivex.rxjava3.core.Single;
 
 public class UserRepository {
 
-    private final FirebaseFirestoreSource firestoreSource;
+    private final UserRemoteDataSource firestoreSource;
 
-    public UserRepository(FirebaseFirestoreSource firestoreSource) {
+    public UserRepository(UserRemoteDataSource firestoreSource) {
         this.firestoreSource = firestoreSource;
     }
 

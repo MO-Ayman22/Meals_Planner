@@ -6,7 +6,7 @@ import com.example.mealsplanner.data.model.User;
 import com.example.mealsplanner.data.repository.AuthRepository;
 import com.example.mealsplanner.data.repository.UserRepository;
 import com.example.mealsplanner.data.source.remote.auth.FirebaseAuthSource;
-import com.example.mealsplanner.data.source.remote.firestore.FirebaseFirestoreSource;
+import com.example.mealsplanner.data.source.remote.firestore.UserRemoteDataSource;
 import com.example.mealsplanner.util.ValidationUtil;
 
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
@@ -25,7 +25,7 @@ public class LoginPresenter implements LoginContract.Presenter {
     public LoginPresenter(Application app, LoginContract.View view) {
         this.view = view;
         this.authRepository = new AuthRepository(new FirebaseAuthSource(app));
-        this.userRepository = new UserRepository(new FirebaseFirestoreSource());
+        this.userRepository = new UserRepository(new UserRemoteDataSource());
     }
 
     @Override

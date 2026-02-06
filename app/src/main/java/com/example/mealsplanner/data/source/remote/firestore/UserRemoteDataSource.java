@@ -8,7 +8,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import io.reactivex.rxjava3.core.Completable;
 import io.reactivex.rxjava3.core.Single;
 
-public class FirebaseFirestoreSource {
+public class UserRemoteDataSource {
 
     private static final String USERS_COLLECTION = "users";
     private final FirebaseFirestore firestore = FirebaseFirestore.getInstance();
