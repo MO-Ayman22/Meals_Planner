@@ -11,6 +11,10 @@ import com.example.mealsplanner.data.model.entity.CategoryEntity;
 import com.example.mealsplanner.data.model.entity.FavoriteMealEntity;
 import com.example.mealsplanner.data.model.entity.PlannedMealEntity;
 import com.example.mealsplanner.data.model.entity.UserEntity;
+import com.example.mealsplanner.data.source.local.dao.AreaDao;
+import com.example.mealsplanner.data.source.local.dao.CategoryDao;
+import com.example.mealsplanner.data.source.local.dao.FavoriteMealDao;
+import com.example.mealsplanner.data.source.local.dao.PlannedMealDao;
 import com.example.mealsplanner.data.source.local.dao.UserDao;
 
 @Database(
@@ -25,6 +29,15 @@ public abstract class AppDatabase extends RoomDatabase {
     private static volatile AppDatabase INSTANCE;
 
     public abstract UserDao getUserDAO();
+
+    public abstract AreaDao getAreaDAO();
+
+    public abstract CategoryDao getCategoryDAO();
+
+    public abstract FavoriteMealDao getFavoriteMealDAO();
+
+    public abstract PlannedMealDao getPlannedMealDAO();
+
 
     public static AppDatabase getInstance(Context context) {
         if (INSTANCE == null) {

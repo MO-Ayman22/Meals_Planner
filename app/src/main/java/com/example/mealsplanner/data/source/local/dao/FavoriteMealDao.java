@@ -10,13 +10,13 @@ import com.example.mealsplanner.data.model.entity.FavoriteMealEntity;
 import java.util.List;
 
 import io.reactivex.rxjava3.core.Completable;
-import io.reactivex.rxjava3.core.Observable;
+import io.reactivex.rxjava3.core.Flowable;
 
 @Dao
 public interface FavoriteMealDao {
 
     @Query("SELECT * FROM favorite_meals")
-    Observable<List<FavoriteMealEntity>> observeAll();
+    Flowable<List<FavoriteMealEntity>> getFavoriteMeals();
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     Completable insert(FavoriteMealEntity meal);

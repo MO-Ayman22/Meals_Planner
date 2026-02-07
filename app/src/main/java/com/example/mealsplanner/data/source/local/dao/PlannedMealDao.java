@@ -10,13 +10,13 @@ import com.example.mealsplanner.data.model.entity.PlannedMealEntity;
 import java.util.List;
 
 import io.reactivex.rxjava3.core.Completable;
-import io.reactivex.rxjava3.core.Single;
+import io.reactivex.rxjava3.core.Flowable;
 
 @Dao
 public interface PlannedMealDao {
 
     @Query("SELECT * FROM planned_meals WHERE day = :day")
-    Single<List<PlannedMealEntity>> getMealsByDay(String day);
+    Flowable<List<PlannedMealEntity>> getMealsByDay(String day);
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     Completable insert(PlannedMealEntity meal);
