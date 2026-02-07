@@ -2,11 +2,11 @@ package com.example.mealsplanner.data.repository;
 
 import androidx.annotation.NonNull;
 
-import com.example.mealsplanner.data.model.User;
+import com.example.mealsplanner.data.model.domain.User;
 import com.example.mealsplanner.data.source.local.usersource.UserLocalDataSource;
 import com.example.mealsplanner.data.source.remote.usersource.UserRemoteDataSource;
 import com.example.mealsplanner.data.source.remote.usersource.UserRemoteDataSourceImpl;
-import com.example.mealsplanner.util.UserMapper;
+import com.example.mealsplanner.util.mapper.UserMapper;
 
 import io.reactivex.rxjava3.core.Completable;
 import io.reactivex.rxjava3.core.Single;

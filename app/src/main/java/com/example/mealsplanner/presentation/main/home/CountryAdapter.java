@@ -10,16 +10,16 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.mealsplanner.R;
-import com.example.mealsplanner.data.model.CountryModel;
+import com.example.mealsplanner.data.model.domain.Area;
 
 import java.util.List;
 
 public class CountryAdapter extends RecyclerView.Adapter<CountryAdapter.CategoryViewHolder> {
 
-    private final List<CountryModel> countries;
+    private final List<Area> countries;
     private final Context context;
 
-    public CountryAdapter(Context context, List<CountryModel> countries) {
+    public CountryAdapter(Context context, List<Area> countries) {
         this.context = context;
         this.countries = countries;
     }
@@ -34,7 +34,7 @@ public class CountryAdapter extends RecyclerView.Adapter<CountryAdapter.Category
 
     @Override
     public void onBindViewHolder(@NonNull CategoryViewHolder holder, int position) {
-        CountryModel model = countries.get(position);
+        Area model = countries.get(position);
     }
 
     @Override

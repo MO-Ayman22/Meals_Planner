@@ -11,16 +11,16 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.mealsplanner.R;
-import com.example.mealsplanner.data.model.CategoryModel;
+import com.example.mealsplanner.data.model.domain.Category;
 
 import java.util.List;
 
 public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.CategoryViewHolder> {
 
-    private final List<CategoryModel> categories;
+    private final List<Category> categories;
     private final Context context;
 
-    public CategoryAdapter(Context context, List<CategoryModel> categories) {
+    public CategoryAdapter(Context context, List<Category> categories) {
         this.context = context;
         this.categories = categories;
     }
@@ -35,7 +35,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
 
     @Override
     public void onBindViewHolder(@NonNull CategoryViewHolder holder, int position) {
-        CategoryModel model = categories.get(position);
+        Category model = categories.get(position);
     }
 
     @Override

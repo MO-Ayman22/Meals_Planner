@@ -2,7 +2,7 @@ package com.example.mealsplanner.data.source.remote.usersource;
 
 import androidx.annotation.NonNull;
 
-import com.example.mealsplanner.data.model.User;
+import com.example.mealsplanner.data.model.domain.User;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import io.reactivex.rxjava3.core.Completable;
@@ -17,7 +17,7 @@ public class UserRemoteDataSourceImpl implements UserRemoteDataSource {
     public Completable createUser(@NonNull User user) {
         return Completable.create(emitter ->
                 firestore.collection(USERS_COLLECTION)
-                        .document(user.getUid())
+                        .document(user.uid())
                         .set(user)
                         .addOnSuccessListener(unused -> emitter.onComplete())
                         .addOnFailureListener(emitter::onError)

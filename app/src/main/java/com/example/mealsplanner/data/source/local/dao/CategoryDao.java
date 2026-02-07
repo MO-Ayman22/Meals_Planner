@@ -5,17 +5,23 @@ import androidx.room.Insert;
 import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
 
-import com.example.mealsplanner.data.model.entity.UserEntity;
+import com.example.mealsplanner.data.model.entity.CategoryEntity;
+
+import java.util.List;
 
 import io.reactivex.rxjava3.core.Completable;
 import io.reactivex.rxjava3.core.Single;
 
-@Dao
-public interface UserDao {
 
-    @Query("SELECT * FROM users WHERE uid = :uid LIMIT 1")
-    Single<UserEntity> getUser(String uid);
+@Dao
+public interface CategoryDao {
+
+    @Query("SELECT * FROM categories")
+    Single<List<CategoryEntity>> getAll();
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    Completable saveUser(UserEntity user);
+    Completable insertAll(List<CategoryEntity> categories);
+
+    @Query("DELETE FROM categories")
+    Completable clear();
 }

@@ -2,7 +2,7 @@ package com.example.mealsplanner.data.source.remote.usersource;
 
 import androidx.annotation.NonNull;
 
-import com.example.mealsplanner.data.model.User;
+import com.example.mealsplanner.data.model.domain.User;
 
 import io.reactivex.rxjava3.core.Completable;
 import io.reactivex.rxjava3.core.Single;

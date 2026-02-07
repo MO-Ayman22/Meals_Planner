@@ -13,8 +13,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.PagerSnapHelper;
 
 import com.example.mealsplanner.R;
-import com.example.mealsplanner.data.model.CategoryModel;
-import com.example.mealsplanner.data.model.CountryModel;
+import com.example.mealsplanner.data.model.domain.Area;
+import com.example.mealsplanner.data.model.domain.Category;
 import com.example.mealsplanner.databinding.FragmentHomeBinding;
 
 import java.util.ArrayList;
@@ -80,18 +80,18 @@ public class HomeFragment extends Fragment {
     }
 
 
-    private List<CategoryModel> getDummyCategories() {
-        List<CategoryModel> list = new ArrayList<>();
+    private List<Category> getDummyCategories() {
+        List<Category> list = new ArrayList<>();
         for (int i = 0; i < 10; i++) {
-            list.add(new CategoryModel("data " + i));
+            list.add(new Category("data " + i));
         }
         return list;
     }
 
-    private List<CountryModel> getDummyCountries() {
-        List<CountryModel> list = new ArrayList<>();
+    private List<Area> getDummyCountries() {
+        List<Area> list = new ArrayList<>();
         for (int i = 0; i < 10; i++) {
-            list.add(new CountryModel("data " + i));
+            list.add(new Area("data " + i));
         }
         return list;
     }

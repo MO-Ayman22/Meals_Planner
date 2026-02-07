@@ -6,11 +6,16 @@ import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
 
+import com.example.mealsplanner.data.model.entity.AreaEntity;
+import com.example.mealsplanner.data.model.entity.CategoryEntity;
+import com.example.mealsplanner.data.model.entity.FavoriteMealEntity;
+import com.example.mealsplanner.data.model.entity.PlannedMealEntity;
+import com.example.mealsplanner.data.model.entity.UserEntity;
 import com.example.mealsplanner.data.source.local.dao.UserDao;
-import com.example.mealsplanner.data.source.local.entity.UserEntity;
 
 @Database(
-        entities = {UserEntity.class},
+        entities = {UserEntity.class, AreaEntity.class, CategoryEntity.class,
+                FavoriteMealEntity.class, PlannedMealEntity.class},
         version = 1,
         exportSchema = false
 )

@@ -1,4 +1,4 @@
-package com.example.mealsplanner.data.source.local.entity;
+package com.example.mealsplanner.data.model.entity;
 
 import androidx.annotation.NonNull;
 import androidx.room.Entity;
@@ -13,6 +13,11 @@ public class UserEntity {
     private String name;
     private String email;
 
+    public UserEntity(@NonNull String uid, String name, String email) {
+        this.uid = uid;
+        this.name = name;
+        this.email = email;
+    }
 
     @NonNull
     public String getUid() {
