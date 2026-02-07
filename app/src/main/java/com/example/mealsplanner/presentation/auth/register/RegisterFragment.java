@@ -14,6 +14,12 @@ import androidx.navigation.NavController;
 import androidx.navigation.fragment.NavHostFragment;
 
 import com.example.mealsplanner.R;
+import com.example.mealsplanner.data.repository.AuthRepository;
+import com.example.mealsplanner.data.repository.UserRepository;
+import com.example.mealsplanner.data.source.local.db.AppDatabase;
+import com.example.mealsplanner.data.source.local.usersource.UserLocalDataSourceImpl;
+import com.example.mealsplanner.data.source.remote.auth.AuthRemoteDataSourceImpl;
+import com.example.mealsplanner.data.source.remote.usersource.UserRemoteDataSourceImpl;
 import com.example.mealsplanner.databinding.FragmentRegisterBinding;
 import com.example.mealsplanner.presentation.main.MainActivity;
 
@@ -37,7 +43,11 @@ public class RegisterFragment extends Fragment implements RegisterContract.View 
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        presenter = new RegisterPresenter(requireActivity().getApplication(), this);
+        presenter = new RegisterPresenter(new AuthRepository(new AuthRemoteDataSourceImpl(requireActivity().getApplication())),
+                new UserRepository(new UserRemoteDataSourceImpl(),
+                        new UserLocalDataSourceImpl(AppDatabase.getInstance(requireContext()).getUserDAO())),
+                this);
+
         navController = NavHostFragment.findNavController(this);
         initListeners();
 

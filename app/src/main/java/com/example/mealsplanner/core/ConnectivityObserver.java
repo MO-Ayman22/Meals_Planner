@@ -5,6 +5,8 @@ import android.net.ConnectivityManager;
 import android.net.Network;
 import android.net.NetworkRequest;
 
+import androidx.annotation.NonNull;
+
 import io.reactivex.rxjava3.core.Observable;
 import io.reactivex.rxjava3.subjects.BehaviorSubject;
 
@@ -19,12 +21,12 @@ public class ConnectivityObserver {
 
         cm.registerNetworkCallback(request, new ConnectivityManager.NetworkCallback() {
             @Override
-            public void onAvailable(Network network) {
+            public void onAvailable(@NonNull Network network) {
                 connectivitySubject.onNext(true);
             }
 
             @Override
-            public void onLost(Network network) {
+            public void onLost(@NonNull Network network) {
                 connectivitySubject.onNext(false);
             }
         });

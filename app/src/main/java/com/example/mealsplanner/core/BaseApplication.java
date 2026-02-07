@@ -2,11 +2,12 @@ package com.example.mealsplanner.core;
 
 import android.annotation.SuppressLint;
 import android.app.Application;
+import android.widget.Toast;
 
 import com.example.mealsplanner.data.repository.UserRepository;
 import com.example.mealsplanner.data.source.local.db.AppDatabase;
-import com.example.mealsplanner.data.source.local.localsources.UserLocalDataSource;
-import com.example.mealsplanner.data.source.remote.firestore.UserRemoteDataSource;
+import com.example.mealsplanner.data.source.local.usersource.UserLocalDataSourceImpl;
+import com.example.mealsplanner.data.source.remote.usersource.UserRemoteDataSourceImpl;
 
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
 import io.reactivex.rxjava3.schedulers.Schedulers;
@@ -27,6 +28,7 @@ public class BaseApplication extends Application {
         return instance;
     }
 
+    @SuppressLint("CheckResult")
     @Override
     public void onCreate() {
         super.onCreate();
@@ -38,6 +40,16 @@ public class BaseApplication extends Application {
         if (sessionManager.isLoggedIn()) {
             loadCurrentUser(sessionManager.getUserId());
         }
+        connectivityObserver.observe()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(isConnected -> {
+                    if (isConnected) {
+                        Toast.makeText(this, "Connected", Toast.LENGTH_SHORT).show();
+                    } else {
+                        Toast.makeText(this, "Disconnected", Toast.LENGTH_SHORT).show();
+                    }
+                });
     }
 
     public SessionManager session() {
@@ -51,8 +63,8 @@ public class BaseApplication extends Application {
     @SuppressLint("CheckResult")
     private void loadCurrentUser(String userId) {
         UserRepository userRepo = new UserRepository(
-                new UserRemoteDataSource(),
-                new UserLocalDataSource(AppDatabase.getInstance(this).getUserDAO())
+                new UserRemoteDataSourceImpl(),
+                new UserLocalDataSourceImpl(AppDatabase.getInstance(this).getUserDAO())
         );
 
         userRepo.getUser(userId)

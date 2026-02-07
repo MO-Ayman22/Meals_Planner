@@ -1,6 +1,7 @@
 package com.example.mealsplanner.data.repository;
 
-import com.example.mealsplanner.data.source.remote.auth.FirebaseAuthSource;
+import com.example.mealsplanner.data.source.remote.auth.AuthRemoteDataSource;
+import com.example.mealsplanner.data.source.remote.auth.AuthRemoteDataSourceImpl;
 import com.google.firebase.auth.FirebaseUser;
 
 import io.reactivex.rxjava3.core.Completable;
@@ -8,9 +9,9 @@ import io.reactivex.rxjava3.core.Single;
 
 public class AuthRepository {
 
-    private final FirebaseAuthSource authSource;
+    private final AuthRemoteDataSource authSource;
 
-    public AuthRepository(FirebaseAuthSource authSource) {
+    public AuthRepository(AuthRemoteDataSourceImpl authSource) {
         this.authSource = authSource;
     }
 

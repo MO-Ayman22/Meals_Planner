@@ -3,8 +3,9 @@ package com.example.mealsplanner.data.repository;
 import androidx.annotation.NonNull;
 
 import com.example.mealsplanner.data.model.User;
-import com.example.mealsplanner.data.source.local.localsources.UserLocalDataSource;
-import com.example.mealsplanner.data.source.remote.firestore.UserRemoteDataSource;
+import com.example.mealsplanner.data.source.local.usersource.UserLocalDataSource;
+import com.example.mealsplanner.data.source.remote.usersource.UserRemoteDataSource;
+import com.example.mealsplanner.data.source.remote.usersource.UserRemoteDataSourceImpl;
 import com.example.mealsplanner.util.UserMapper;
 
 import io.reactivex.rxjava3.core.Completable;
@@ -15,7 +16,7 @@ public class UserRepository {
     private final UserRemoteDataSource remoteSource;
     private final UserLocalDataSource localSource;
 
-    public UserRepository(UserRemoteDataSource remoteSource, UserLocalDataSource localSource) {
+    public UserRepository(UserRemoteDataSourceImpl remoteSource, UserLocalDataSource localSource) {
         this.remoteSource = remoteSource;
         this.localSource = localSource;
     }

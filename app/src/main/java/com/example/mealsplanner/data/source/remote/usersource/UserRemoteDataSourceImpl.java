@@ -1,4 +1,4 @@
-package com.example.mealsplanner.data.source.remote.firestore;
+package com.example.mealsplanner.data.source.remote.usersource;
 
 import androidx.annotation.NonNull;
 
@@ -8,11 +8,12 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import io.reactivex.rxjava3.core.Completable;
 import io.reactivex.rxjava3.core.Single;
 
-public class UserRemoteDataSource {
+public class UserRemoteDataSourceImpl implements UserRemoteDataSource {
 
     private static final String USERS_COLLECTION = "users";
     private final FirebaseFirestore firestore = FirebaseFirestore.getInstance();
 
+    @Override
     public Completable createUser(@NonNull User user) {
         return Completable.create(emitter ->
                 firestore.collection(USERS_COLLECTION)
@@ -23,6 +24,7 @@ public class UserRemoteDataSource {
         );
     }
 
+    @Override
     public Single<User> getUser(String uid) {
         return Single.create(emitter ->
                 firestore.collection(USERS_COLLECTION)
@@ -39,6 +41,8 @@ public class UserRemoteDataSource {
                         .addOnFailureListener(emitter::onError)
         );
     }
+
+    @Override
     public Single<Boolean> exists(@NonNull String uid) {
         return Single.create(emitter ->
                 firestore.collection(USERS_COLLECTION)
@@ -49,6 +53,7 @@ public class UserRemoteDataSource {
         );
     }
 
+    @Override
     public Single<Boolean> existsByEmail(@NonNull String email) {
         return Single.create(emitter ->
                 firestore.collection(USERS_COLLECTION)

@@ -29,14 +29,14 @@ import com.google.firebase.auth.UserProfileChangeRequest;
 import io.reactivex.rxjava3.core.Completable;
 import io.reactivex.rxjava3.core.Single;
 
-public class FirebaseAuthSource {
+public class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
 
     private final FirebaseAuth auth;
     private final CredentialManager credentialManager;
     private final GetCredentialRequest credentialRequest;
     private final Application app;
 
-    public FirebaseAuthSource(@NonNull Application app) {
+    public AuthRemoteDataSourceImpl(@NonNull Application app) {
         this.app = app;
         this.auth = FirebaseAuth.getInstance();
         credentialManager = CredentialManager.create(app);
@@ -46,6 +46,7 @@ public class FirebaseAuthSource {
         credentialRequest = new GetCredentialRequest.Builder().addCredentialOption(googleIdOption).build();
     }
 
+    @Override
     public Single<FirebaseUser> signInWithGoogle() {
         return Single.create(emitter -> {
             credentialManager.getCredentialAsync(
@@ -104,7 +105,7 @@ public class FirebaseAuthSource {
         });
     }
 
-
+    @Override
     public Single<FirebaseUser> signInWithEmail(String email, String password) {
         return Single.create(emitter ->
                 auth.signInWithEmailAndPassword(email, password)
@@ -120,6 +121,7 @@ public class FirebaseAuthSource {
         );
     }
 
+    @Override
     public Single<FirebaseUser> register(String email, String password, String name) {
         return Single.create(emitter ->
                 auth.createUserWithEmailAndPassword(email, password)
@@ -145,7 +147,7 @@ public class FirebaseAuthSource {
         );
     }
 
-
+    @Override
     public Completable resetPassword(String email) {
         return Completable.create(emitter ->
                 auth.sendPasswordResetEmail(email)
