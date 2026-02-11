@@ -5,22 +5,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#eee"
-    tools:context=".presentation.main.categories.CategoriesFragment">
+    tools:context=".presentation.main.categories.view.CategoriesFragment">
 
-    <com.google.android.material.appbar.MaterialToolbar
-        android:id="@+id/topAppBar"
-        android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:background="@color/white"
-        android:elevation="4dp"
-        android:foreground="?attr/selectableItemBackgroundBorderless"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:navigationContentDescription="Back"
-        app:navigationIcon="@drawable/ic_back"
-        app:title="Categories"
-        app:titleTextColor="@color/text_primary" />
+
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerCategories"
@@ -33,7 +20,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/topAppBar"
+        app:layout_constraintTop_toTopOf="parent"
         app:spanCount="2"
         tools:listitem="@layout/grid_category_item" />
 

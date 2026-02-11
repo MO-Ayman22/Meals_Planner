@@ -35,4 +35,5 @@ public interface MealsApiService {
 
     @GET("filter.php")
     Single<MealPreviewListResponse> filterByCategory(@Query("c") String category);
+
 }

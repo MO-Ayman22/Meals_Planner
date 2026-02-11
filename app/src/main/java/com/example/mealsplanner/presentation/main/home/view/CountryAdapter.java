@@ -1,4 +1,4 @@
-package com.example.mealsplanner.presentation.main.home;
+package com.example.mealsplanner.presentation.main.home.view;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -18,10 +18,13 @@ public class CountryAdapter extends RecyclerView.Adapter<CountryAdapter.Category
 
     private final List<Area> countries;
     private final Context context;
+    private final OnAreaClickListener listener;
 
-    public CountryAdapter(Context context, List<Area> countries) {
+
+    public CountryAdapter(Context context, List<Area> countries, OnAreaClickListener listener) {
         this.context = context;
         this.countries = countries;
+        this.listener = listener;
     }
 
     @NonNull
@@ -35,11 +38,20 @@ public class CountryAdapter extends RecyclerView.Adapter<CountryAdapter.Category
     @Override
     public void onBindViewHolder(@NonNull CategoryViewHolder holder, int position) {
         Area model = countries.get(position);
+        holder.tvCountryCode.setText(model.getName().substring(0, 2));
+        holder.tvCountryName.setText(model.getName());
+        holder.itemView.setOnClickListener(v -> listener.onAreaClick(model));
     }
 
     @Override
     public int getItemCount() {
         return countries.size();
+    }
+
+    public void submitList(List<Area> areas) {
+        this.countries.clear();
+        this.countries.addAll(areas);
+        notifyDataSetChanged();
     }
 
     static class CategoryViewHolder extends RecyclerView.ViewHolder {

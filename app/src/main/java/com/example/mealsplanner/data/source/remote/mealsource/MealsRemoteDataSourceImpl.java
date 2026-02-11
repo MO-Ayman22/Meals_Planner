@@ -43,7 +43,7 @@ public class MealsRemoteDataSourceImpl implements MealsRemoteDataSource {
                 .map(AreaListResponse::getAreas);
     }
 
-    public Single<List<MealDto>> searchMealsByName(String query) {
+    public Single<List<MealDto>> getMealsByName(String query) {
         return api.searchMealsByName(query)
                 .map(MealsResponse::getMeals);
     }
@@ -73,5 +73,6 @@ public class MealsRemoteDataSourceImpl implements MealsRemoteDataSource {
                     return response.getMeals().get(0);
                 });
     }
+
 }
 

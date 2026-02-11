@@ -1,4 +1,4 @@
-package com.example.mealsplanner.presentation.main.categories;
+package com.example.mealsplanner.presentation.main.favorites.view;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -9,12 +9,13 @@ import androidx.fragment.app.Fragment;
 
 import com.example.mealsplanner.R;
 
-public class CategoriesFragment extends Fragment {
+
+public class FavoritesFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_categories, container, false);
+        return inflater.inflate(R.layout.fragment_favorites, container, false);
     }
 }

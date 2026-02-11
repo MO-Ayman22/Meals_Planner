@@ -50,7 +50,10 @@ public class BaseApplication extends Application {
                         Toast.makeText(this, "Disconnected", Toast.LENGTH_SHORT).show();
                     }
                 });
+        sessionManager.saveRandomMeal(null);
+
     }
+
 
     public SessionManager session() {
         return sessionManager;

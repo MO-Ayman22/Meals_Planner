@@ -14,7 +14,7 @@ public interface MealsRemoteDataSource {
 
     Single<List<CategoryDto>> getCategories();
 
-    Single<List<MealDto>> searchMealsByName(String query);
+    Single<List<MealDto>> getMealsByName(String query);
 
     Single<List<MealDto>> searchMealsByFirstLetter(char letter);
 

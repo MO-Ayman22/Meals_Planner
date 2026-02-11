@@ -35,7 +35,7 @@ public class CategoryMapper {
         );
     }
 
-    public static List<Category> fromDtoList(List<CategoryDto> dtos) {
+    public static List<Category> fromDtos(List<CategoryDto> dtos) {
         return Observable.fromIterable(dtos)
                 .subscribeOn(Schedulers.computation())
                 .map(CategoryMapper::fromDto)
@@ -43,7 +43,7 @@ public class CategoryMapper {
                 .blockingGet();
     }
 
-    public static List<Category> fromEntityList(List<CategoryEntity> entities) {
+    public static List<Category> fromEntities(List<CategoryEntity> entities) {
         return Observable.fromIterable(entities)
                 .subscribeOn(Schedulers.computation())
                 .map(CategoryMapper::fromEntity)
@@ -51,11 +51,28 @@ public class CategoryMapper {
                 .blockingGet();
     }
 
-    public static List<CategoryEntity> toEntityList(List<Category> categories) {
+    public static List<CategoryEntity> toEntities(List<Category> categories) {
         return Observable.fromIterable(categories)
                 .subscribeOn(Schedulers.computation())
                 .map(CategoryMapper::toEntity)
                 .toList()
                 .blockingGet();
     }
+
+    public static CategoryEntity dtoToEntity(CategoryDto dto) {
+        return new CategoryEntity(
+                dto.getId(),
+                dto.getName(),
+                dto.getImage()
+        );
+    }
+
+    public static List<CategoryEntity> dtosToEntities(List<CategoryDto> dtos) {
+        return Observable.fromIterable(dtos)
+                .subscribeOn(Schedulers.computation())
+                .map(CategoryMapper::dtoToEntity)
+                .toList()
+                .blockingGet();
+    }
+
 }

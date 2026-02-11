@@ -31,6 +31,10 @@ public class AreaMapper {
         return new AreaEntity(area.getName());
     }
 
+    public static AreaEntity dtoToEntity(AreaDto area) {
+        return new AreaEntity(area.getName());
+    }
+
     public static List<AreaEntity> toEntities(List<Area> areas) {
         return Observable.fromIterable(areas)
                 .subscribeOn(Schedulers.computation())
@@ -38,4 +42,23 @@ public class AreaMapper {
                 .toList()
                 .blockingGet();
     }
+
+    public static List<AreaEntity> dtosToEntities(List<AreaDto> areas) {
+        return Observable.fromIterable(areas)
+                .subscribeOn(Schedulers.computation())
+                .map(AreaMapper::dtoToEntity)
+                .toList()
+                .blockingGet();
+    }
+
+    public static List<Area> fromDtos(List<AreaDto> dtos) {
+        return Observable.fromIterable(dtos)
+                .subscribeOn(Schedulers.computation())
+                .map(AreaMapper::fromDto)
+                .toList()
+                .blockingGet();
+    }
+
+
+
 }

@@ -1,5 +1,6 @@
 package com.example.mealsplanner.data.source.local.mealsource;
 
+import com.example.mealsplanner.core.BaseApplication;
 import com.example.mealsplanner.data.model.entity.AreaEntity;
 import com.example.mealsplanner.data.model.entity.CategoryEntity;
 import com.example.mealsplanner.data.model.entity.FavoriteMealEntity;
@@ -76,16 +77,17 @@ public class MealsLocalDataSourceImpl implements MealsLocalDataSource {
 
     @Override
     public Flowable<List<FavoriteMealEntity>> getFavoriteMeals() {
-        return favoriteMealDao.getFavoriteMeals();
+
+        return favoriteMealDao.getFavorites(BaseApplication.getInstance().session().getUserId());
     }
 
     @Override
     public Completable insertFavoriteMeal(FavoriteMealEntity meal) {
-        return null;
+        return favoriteMealDao.insert(meal);
     }
 
     @Override
     public Completable deleteFavoriteMeal(String mealId) {
-        return null;
+        return favoriteMealDao.delete(BaseApplication.getInstance().session().getUserId(), mealId);
     }
 }

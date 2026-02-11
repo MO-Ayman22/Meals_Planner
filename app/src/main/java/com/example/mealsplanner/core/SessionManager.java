@@ -7,7 +7,10 @@ import androidx.annotation.Nullable;
 
 public class SessionManager {
     private static final String PREF_NAME = "user_session";
+
+
     private static final String KEY_IS_LOGGED_IN = "is_logged_in";
+    private static final String KEY_RANDOM_MEAL = "random_meal";
     private static final String KEY_USER_ID = "user_id";
     private static volatile SessionManager instance;
     private final SharedPreferences prefs;
@@ -46,6 +49,16 @@ public class SessionManager {
     public void logout() {
         prefs.edit()
                 .putBoolean(KEY_IS_LOGGED_IN, false).apply();
+    }
+
+    public void saveRandomMeal(String randomMealId) {
+        prefs.edit()
+                .putString(KEY_RANDOM_MEAL, randomMealId)
+                .apply();
+    }
+
+    public String getRandomMeal() {
+        return prefs.getString(KEY_RANDOM_MEAL, null);
     }
 
 }

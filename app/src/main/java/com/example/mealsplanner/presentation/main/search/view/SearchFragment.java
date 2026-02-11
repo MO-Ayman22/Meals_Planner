@@ -1,4 +1,4 @@
-package com.example.mealsplanner.presentation.main.search;
+package com.example.mealsplanner.presentation.main.search.view;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
