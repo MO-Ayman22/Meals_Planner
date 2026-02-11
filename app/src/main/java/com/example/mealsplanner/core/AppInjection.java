@@ -6,10 +6,14 @@ import androidx.annotation.NonNull;
 
 import com.example.mealsplanner.data.repository.AreaRepository;
 import com.example.mealsplanner.data.repository.CategoryRepository;
+import com.example.mealsplanner.data.repository.FavoriteRepository;
 import com.example.mealsplanner.data.repository.MealRepository;
 import com.example.mealsplanner.data.source.local.db.AppDatabase;
+import com.example.mealsplanner.data.source.local.favorite.FavoriteLocalDataSourceImpl;
 import com.example.mealsplanner.data.source.local.mealsource.MealsLocalDataSourceImpl;
 import com.example.mealsplanner.data.source.remote.api.RetrofitClient;
+import com.example.mealsplanner.data.source.remote.favorite.FavoriteFirebaseDataSource;
+import com.example.mealsplanner.data.source.remote.favorite.FavoriteRemoteDataSource;
 import com.example.mealsplanner.data.source.remote.mealsource.MealsRemoteDataSourceImpl;
 import com.example.mealsplanner.presentation.main.areameals.contract.AreaMealsContract;
 import com.example.mealsplanner.presentation.main.areameals.presenter.AreaMealsPresenter;
@@ -17,6 +21,8 @@ import com.example.mealsplanner.presentation.main.categories.contract.Categories
 import com.example.mealsplanner.presentation.main.categories.presenter.CategoriesPresenter;
 import com.example.mealsplanner.presentation.main.categorymeals.contract.CategoryMealsContract;
 import com.example.mealsplanner.presentation.main.categorymeals.presenter.CategoryMealsPresenter;
+import com.example.mealsplanner.presentation.main.favorites.contract.FavoriteContract;
+import com.example.mealsplanner.presentation.main.favorites.presenter.FavoritePresenter;
 import com.example.mealsplanner.presentation.main.home.contract.HomeContract;
 import com.example.mealsplanner.presentation.main.home.presenter.HomePresenter;
 import com.example.mealsplanner.presentation.main.mealdetails.contract.MealDetailsContract;
@@ -47,6 +53,20 @@ public final class AppInjection {
                 RetrofitClient.getInstance().getApiService()
         );
     }
+
+    public static FavoriteLocalDataSourceImpl provideFavoriteLocalDataSource(Context context) {
+        AppDatabase db = AppDatabase.getInstance(context.getApplicationContext());
+
+        return new FavoriteLocalDataSourceImpl(
+                db.getFavoriteMealDAO(),
+                BaseApplication.getInstance().session().getUserId()
+        );
+    }
+
+    public static FavoriteRemoteDataSource provideFavoriteRemoteDataSource(Context context) {
+        return new FavoriteFirebaseDataSource();
+    }
+
 
     // Repositories
 
@@ -109,12 +129,21 @@ public final class AppInjection {
         MealsLocalDataSourceImpl local = provideLocalDataSource(context);
         MealsRemoteDataSourceImpl remote = provideRemoteDataSource();
 
+        FavoriteRemoteDataSource remoteDataSource = provideFavoriteRemoteDataSource(context);
+        FavoriteLocalDataSourceImpl favoriteLocal = provideFavoriteLocalDataSource(context);
+
+
         MealRepository mealRepo =
                 provideMealRepository(remote);
 
+
+        FavoriteRepository favoriteRepo = new FavoriteRepository(favoriteLocal, remoteDataSource, BaseApplication.getInstance().session().getUserId());
+
+
         return new MealDetailsPresenter(
                 view,
-                mealRepo
+                mealRepo,
+                favoriteRepo
         );
     }
 
@@ -152,6 +181,21 @@ public final class AppInjection {
         return new AreaMealsPresenter(
                 view,
                 mealRepo
+        );
+    }
+
+    public static FavoritePresenter provideFavoritePresenter(FavoriteContract.View view, Context context) {
+        MealsLocalDataSourceImpl local = provideLocalDataSource(context);
+        MealsRemoteDataSourceImpl remote = provideRemoteDataSource();
+
+        FavoriteRemoteDataSource remoteDataSource = provideFavoriteRemoteDataSource(context);
+        FavoriteLocalDataSourceImpl favoriteLocal = provideFavoriteLocalDataSource(context);
+        MealRepository mealRepo =
+                provideMealRepository(remote);
+        FavoriteRepository favoriteRepo = new FavoriteRepository(favoriteLocal, remoteDataSource, BaseApplication.getInstance().session().getUserId());
+        return new FavoritePresenter(
+                view,
+                favoriteRepo
         );
     }
 }

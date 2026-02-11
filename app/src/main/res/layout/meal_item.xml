@@ -11,12 +11,13 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="160dp">
+
 
         <ImageView
             android:id="@+id/ivMealImage"
-            android:layout_width="144dp"
-            android:layout_height="144dp"
+            android:layout_width="match_parent"
+            android:layout_height="160dp"
             android:adjustViewBounds="true"
             android:scaleType="centerCrop"
             android:src="@drawable/ic_launcher_background"
@@ -24,53 +25,31 @@
             app:layout_constraintTop_toTopOf="parent"
             tools:src="@tools:sample/avatars" />
 
-
         <TextView
             android:id="@+id/tvTitle"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
-            android:layout_marginEnd="8dp"
-            android:textColor="@color/text_primary"
-            android:textSize="18sp"
+            android:gravity="center"
+            android:textColor="@color/white"
             android:textStyle="bold"
-            app:layout_constraintBottom_toTopOf="@+id/tvSubtitle"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/ivMealImage"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.3"
-            app:layout_constraintVertical_chainStyle="packed"
+            android:textSize="24sp"
+            app:layout_constraintBottom_toBottomOf="@+id/ivMealImage"
+            app:layout_constraintEnd_toEndOf="@+id/ivMealImage"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/ivMealImage"
+            app:layout_constraintVertical_bias="0.8"
             tools:text="Sushi Platter" />
 
-        <TextView
-            android:id="@+id/tvSubtitle"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
-            android:textColor="@color/text_secondary"
-            android:textSize="14sp"
-            app:layout_constraintBottom_toBottomOf="@+id/ivMealImage"
-            app:layout_constraintEnd_toEndOf="@+id/tvTitle"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="@+id/tvTitle"
-            app:layout_constraintTop_toBottomOf="@+id/tvTitle"
-            tools:text="Lunch • Japanese" />
-
-        <Button
-            android:id="@+id/btnAddPlanner"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/bg_buttons_auth"
-            android:drawableTint="@android:color/white"
-            android:text="@string/add_to_planner"
-            android:textAllCaps="false"
-            android:textColor="@android:color/white"
-            android:textSize="14sp"
-            app:cornerRadius="20dp"
-            app:layout_constraintBottom_toBottomOf="@+id/ivMealImage"
+        <ImageButton
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_margin="16dp"
+            android:background="@drawable/bg_oval"
+            android:src="@drawable/ic_calendar"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/ivMealImage"
-            app:layout_constraintTop_toBottomOf="@+id/tvSubtitle" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:tint="@color/primary" />
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

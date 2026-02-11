@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -27,6 +28,8 @@ import java.util.Arrays;
 
 public class MealDetailsFragment extends Fragment implements MealDetailsContract.View {
     private String mealId;
+    private Meal meal;
+    private boolean isFavorite;
     private MealDetailsPresenter presenter;
 
     private FragmentMealDetailsBinding binding;
@@ -49,8 +52,18 @@ public class MealDetailsFragment extends Fragment implements MealDetailsContract
             mealId = MealDetailsFragmentArgs.fromBundle(getArguments()).getMealId();
         initPresenter();
         setupRecyclerViews();
-        if (mealId != null)
+        if (mealId != null) {
             presenter.getMeal(mealId);
+            presenter.isFavorite(mealId);
+        }
+        binding.favButton.setOnClickListener(v -> {
+            if (isFavorite) {
+                Toast.makeText(requireContext(), "Removed from favorites", Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(requireContext(), "Added to favorites", Toast.LENGTH_SHORT).show();
+            }
+            presenter.toggleFavorite(meal, isFavorite);
+        });
     }
 
     private void setupRecyclerViews() {
@@ -82,13 +95,24 @@ public class MealDetailsFragment extends Fragment implements MealDetailsContract
 
     @Override
     public void showMeal(Meal meal) {
+        this.meal = meal;
         setupViews(meal);
+    }
+
+    @Override
+    public void showFavorite(Boolean isFavorite) {
+        if (isFavorite) {
+            binding.favButton.setImageResource(R.drawable.ic_fav_active);
+        } else {
+            binding.favButton.setImageResource(R.drawable.ic_fav);
+        }
+        this.isFavorite = isFavorite;
     }
 
     private void setupViews(Meal meal) {
         binding.tvMealTitle.setText(meal.getName());
         binding.tvMealCategory.setText(meal.getCategory());
-        Glide.with(requireContext())
+        Glide.with(binding.ivMeal)
                 .load(meal.getImage())
                 .placeholder(R.drawable.outline_arrow_circle_down_24)
                 .error(R.drawable.outline_cloud_alert_24)

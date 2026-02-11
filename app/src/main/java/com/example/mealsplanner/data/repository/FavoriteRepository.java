@@ -31,7 +31,6 @@ public class FavoriteRepository {
         return local.getFavorites();
     }
 
-
     public Completable addFavorite(Meal meal) {
         return local.insertFavorite(meal)
                 .andThen(
@@ -50,7 +49,7 @@ public class FavoriteRepository {
 
 
     public Single<Boolean> isFavorite(String mealId) {
-        return local.isFavorite(mealId);
+        return local.isFavorite(mealId).onErrorReturnItem(false);
     }
 
 

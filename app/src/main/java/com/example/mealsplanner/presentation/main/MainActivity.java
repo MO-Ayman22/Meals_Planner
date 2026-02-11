@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.navigation.NavController;
 import androidx.navigation.fragment.NavHostFragment;
 import androidx.navigation.ui.NavigationUI;
@@ -26,6 +27,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
 
         setupBottomNavigation();
+
+
     }
 
     private void setupBottomNavigation() {
@@ -44,16 +47,34 @@ public class MainActivity extends AppCompatActivity {
         ));
 
         navController.addOnDestinationChangedListener((controller, destination, arguments) -> {
-            binding.bottomNav.setVisibility(
-                    hiddenDestinations.contains(destination.getId())
-                            ? View.GONE
-                            : View.VISIBLE
-            );
+            boolean shouldHide =
+                    hiddenDestinations.contains(destination.getId());
+
+            showBottomNav(!shouldHide);
         });
 
         binding.bottomNav.setOnItemReselectedListener(item -> {
         });
     }
 
+    public void showBottomNav(boolean show) {
+
+        ConstraintLayout.LayoutParams params =
+                (ConstraintLayout.LayoutParams) binding.fragmentContainerView.getLayoutParams();
+
+        if (show) {
+            binding.bottomNav.setVisibility(View.VISIBLE);
+
+            params.bottomToTop = R.id.bottom_nav;
+
+        } else {
+            binding.bottomNav.setVisibility(View.GONE);
+
+            params.bottomToBottom = ConstraintLayout.LayoutParams.PARENT_ID;
+            params.bottomToTop = ConstraintLayout.LayoutParams.UNSET;
+        }
+
+        binding.fragmentContainerView.setLayoutParams(params);
+    }
 
 }
