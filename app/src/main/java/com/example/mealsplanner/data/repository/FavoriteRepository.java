@@ -1,6 +1,6 @@
 package com.example.mealsplanner.data.repository;
 
-import com.example.mealsplanner.data.model.domain.Meal;
+import com.example.mealsplanner.data.domain.model.Meal;
 import com.example.mealsplanner.data.source.local.favorite.FavoriteLocalDataSource;
 import com.example.mealsplanner.data.source.remote.favorite.FavoriteRemoteDataSource;
 

@@ -1,10 +1,11 @@
 package com.example.mealsplanner.util.mapper;
 
-import com.example.mealsplanner.data.model.domain.Meal;
-import com.example.mealsplanner.data.model.domain.MealPreview;
-import com.example.mealsplanner.data.model.dto.MealDto;
-import com.example.mealsplanner.data.model.dto.MealPreviewDto;
-import com.example.mealsplanner.data.model.entity.FavoriteMealEntity;
+import com.example.mealsplanner.data.domain.dto.MealDto;
+import com.example.mealsplanner.data.domain.dto.MealPreviewDto;
+import com.example.mealsplanner.data.domain.entity.FavoriteMealEntity;
+import com.example.mealsplanner.data.domain.entity.PlannedMealEntity;
+import com.example.mealsplanner.data.domain.model.Meal;
+import com.example.mealsplanner.data.domain.model.MealPreview;
 
 import java.util.List;
 
@@ -90,6 +91,22 @@ public class MealMapper {
     public static FavoriteMealEntity toFavEntity(Meal meal, String userId) {
         return new FavoriteMealEntity(
                 userId,
+                meal.getId(),
+                meal.getName(),
+                meal.getCategory(),
+                meal.getArea(),
+                meal.getInstructions(),
+                meal.getImage(),
+                meal.getIngredients(),
+                meal.getMeasures(),
+                meal.getYoutube()
+        );
+    }
+
+    public static PlannedMealEntity toPlannedEntity(Meal meal, String userId, String day) {
+        return new PlannedMealEntity(
+                userId,
+                day,
                 meal.getId(),
                 meal.getName(),
                 meal.getCategory(),

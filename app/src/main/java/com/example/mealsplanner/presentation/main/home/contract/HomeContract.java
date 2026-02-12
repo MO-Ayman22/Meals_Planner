@@ -1,8 +1,8 @@
 package com.example.mealsplanner.presentation.main.home.contract;
 
-import com.example.mealsplanner.data.model.domain.Area;
-import com.example.mealsplanner.data.model.domain.Category;
-import com.example.mealsplanner.data.model.domain.Meal;
+import com.example.mealsplanner.data.domain.model.Area;
+import com.example.mealsplanner.data.domain.model.Category;
+import com.example.mealsplanner.data.domain.model.Meal;
 
 import java.util.List;
 
@@ -13,6 +13,10 @@ public class HomeContract {
         void showAreas(List<Area> areas);
 
         void showRandomMeal(Meal meal);
+
+        void LostConnection();
+
+        void Connected();
     }
 
     public interface Presenter {
@@ -21,5 +25,9 @@ public class HomeContract {
         void getAreas();
 
         void getRandomMeal();
+
+        void internetObserve();
+
+        void clear();
     }
 }

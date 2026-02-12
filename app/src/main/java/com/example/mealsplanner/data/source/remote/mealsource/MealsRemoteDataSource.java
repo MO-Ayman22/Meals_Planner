@@ -1,9 +1,9 @@
 package com.example.mealsplanner.data.source.remote.mealsource;
 
-import com.example.mealsplanner.data.model.dto.AreaDto;
-import com.example.mealsplanner.data.model.dto.CategoryDto;
-import com.example.mealsplanner.data.model.dto.MealDto;
-import com.example.mealsplanner.data.model.dto.MealPreviewDto;
+import com.example.mealsplanner.data.domain.dto.AreaDto;
+import com.example.mealsplanner.data.domain.dto.CategoryDto;
+import com.example.mealsplanner.data.domain.dto.MealDto;
+import com.example.mealsplanner.data.domain.dto.MealPreviewDto;
 
 import java.util.List;
 

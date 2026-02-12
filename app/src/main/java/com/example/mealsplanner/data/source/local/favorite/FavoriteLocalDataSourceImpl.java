@@ -1,6 +1,6 @@
 package com.example.mealsplanner.data.source.local.favorite;
 
-import com.example.mealsplanner.data.model.domain.Meal;
+import com.example.mealsplanner.data.domain.model.Meal;
 import com.example.mealsplanner.data.source.local.dao.FavoriteMealDao;
 import com.example.mealsplanner.util.mapper.MealMapper;
 

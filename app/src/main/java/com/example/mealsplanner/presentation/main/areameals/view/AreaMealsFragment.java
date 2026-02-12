@@ -13,7 +13,7 @@ import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.example.mealsplanner.core.AppInjection;
-import com.example.mealsplanner.data.model.domain.MealPreview;
+import com.example.mealsplanner.data.domain.model.MealPreview;
 import com.example.mealsplanner.databinding.FragmentAreaMealsBinding;
 import com.example.mealsplanner.presentation.main.areameals.contract.AreaMealsContract;
 import com.example.mealsplanner.presentation.main.areameals.presenter.AreaMealsPresenter;
@@ -79,5 +79,11 @@ public class AreaMealsFragment extends Fragment implements AreaMealsContract.Vie
     public void onMealClick(MealPreview meal) {
         NavDirections action = AreaMealsFragmentDirections.actionAreaMealsFragmentToMealDetailsFragment(meal.getId());
         Navigation.findNavController(requireView()).navigate(action);
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        presenter.clear();
     }
 }

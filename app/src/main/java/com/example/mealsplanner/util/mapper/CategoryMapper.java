@@ -1,8 +1,8 @@
 package com.example.mealsplanner.util.mapper;
 
-import com.example.mealsplanner.data.model.domain.Category;
-import com.example.mealsplanner.data.model.dto.CategoryDto;
-import com.example.mealsplanner.data.model.entity.CategoryEntity;
+import com.example.mealsplanner.data.domain.dto.CategoryDto;
+import com.example.mealsplanner.data.domain.entity.CategoryEntity;
+import com.example.mealsplanner.data.domain.model.Category;
 
 import java.util.List;
 

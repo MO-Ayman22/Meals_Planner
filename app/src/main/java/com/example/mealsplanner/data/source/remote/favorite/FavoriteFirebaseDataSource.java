@@ -1,6 +1,6 @@
 package com.example.mealsplanner.data.source.remote.favorite;
 
-import com.example.mealsplanner.data.model.domain.Meal;
+import com.example.mealsplanner.data.domain.model.Meal;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 

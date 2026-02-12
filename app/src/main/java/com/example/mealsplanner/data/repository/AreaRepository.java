@@ -1,7 +1,7 @@
 package com.example.mealsplanner.data.repository;
 
-import com.example.mealsplanner.data.model.domain.Area;
-import com.example.mealsplanner.data.model.entity.AreaEntity;
+import com.example.mealsplanner.data.domain.entity.AreaEntity;
+import com.example.mealsplanner.data.domain.model.Area;
 import com.example.mealsplanner.data.source.local.mealsource.MealsLocalDataSource;
 import com.example.mealsplanner.data.source.remote.mealsource.MealsRemoteDataSource;
 import com.example.mealsplanner.util.mapper.AreaMapper;

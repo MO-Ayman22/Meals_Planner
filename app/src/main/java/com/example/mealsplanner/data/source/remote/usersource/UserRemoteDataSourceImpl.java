@@ -2,7 +2,7 @@ package com.example.mealsplanner.data.source.remote.usersource;
 
 import androidx.annotation.NonNull;
 
-import com.example.mealsplanner.data.model.domain.User;
+import com.example.mealsplanner.data.domain.model.User;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import io.reactivex.rxjava3.core.Completable;

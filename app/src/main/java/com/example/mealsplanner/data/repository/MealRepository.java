@@ -1,8 +1,8 @@
 package com.example.mealsplanner.data.repository;
 
 import com.example.mealsplanner.core.BaseApplication;
-import com.example.mealsplanner.data.model.domain.Meal;
-import com.example.mealsplanner.data.model.domain.MealPreview;
+import com.example.mealsplanner.data.domain.model.Meal;
+import com.example.mealsplanner.data.domain.model.MealPreview;
 import com.example.mealsplanner.data.source.remote.mealsource.MealsRemoteDataSource;
 import com.example.mealsplanner.util.mapper.MealMapper;
 

@@ -4,6 +4,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -12,7 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.mealsplanner.R;
-import com.example.mealsplanner.data.model.domain.MealPreview;
+import com.example.mealsplanner.data.domain.model.MealPreview;
 
 import java.util.List;
 
@@ -60,18 +61,19 @@ public class MealsAdapter
     static class MealsViewHolder extends RecyclerView.ViewHolder {
 
         ImageView imgMeal;
-        TextView tvMealTitle, tvMealSubtitle;
+        TextView tvMealTitle;
+        ImageButton ibDelete;
 
         public MealsViewHolder(@NonNull View itemView) {
             super(itemView);
             imgMeal = itemView.findViewById(R.id.ivMealImage);
             tvMealTitle = itemView.findViewById(R.id.tvTitle);
-            tvMealSubtitle = itemView.findViewById(R.id.tvSubtitle);
+            ibDelete = itemView.findViewById(R.id.ibDelete);
         }
 
         void bind(MealPreview meal,
                   OnMealClickListener listener) {
-
+            ibDelete.setVisibility(View.GONE);
             tvMealTitle.setText(meal.getName());
             Glide.with(itemView)
                     .load(meal.getImage())

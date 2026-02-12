@@ -1,6 +1,6 @@
 package com.example.mealsplanner.presentation.main.areameals.contract;
 
-import com.example.mealsplanner.data.model.domain.MealPreview;
+import com.example.mealsplanner.data.domain.model.MealPreview;
 
 import java.util.List;
 
@@ -11,5 +11,7 @@ public class AreaMealsContract {
 
     public interface Presenter {
         void getMealsByArea(String area);
+
+        void clear();
     }
 }

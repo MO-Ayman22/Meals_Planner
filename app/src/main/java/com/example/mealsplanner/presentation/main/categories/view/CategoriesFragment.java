@@ -13,7 +13,7 @@ import androidx.navigation.fragment.NavHostFragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 
 import com.example.mealsplanner.core.AppInjection;
-import com.example.mealsplanner.data.model.domain.Category;
+import com.example.mealsplanner.data.domain.model.Category;
 import com.example.mealsplanner.databinding.FragmentCategoriesBinding;
 import com.example.mealsplanner.presentation.main.categories.contract.CategoriesContract;
 import com.example.mealsplanner.presentation.main.categories.presenter.CategoriesPresenter;

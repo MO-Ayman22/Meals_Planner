@@ -1,7 +1,7 @@
 package com.example.mealsplanner.data.repository;
 
-import com.example.mealsplanner.data.model.domain.Category;
-import com.example.mealsplanner.data.model.entity.CategoryEntity;
+import com.example.mealsplanner.data.domain.entity.CategoryEntity;
+import com.example.mealsplanner.data.domain.model.Category;
 import com.example.mealsplanner.data.source.local.mealsource.MealsLocalDataSource;
 import com.example.mealsplanner.data.source.remote.mealsource.MealsRemoteDataSource;
 import com.example.mealsplanner.util.mapper.CategoryMapper;

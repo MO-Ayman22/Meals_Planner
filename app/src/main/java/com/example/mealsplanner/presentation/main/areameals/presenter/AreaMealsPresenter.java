@@ -28,4 +28,9 @@ public class AreaMealsPresenter implements AreaMealsContract.Presenter {
                 .subscribe(view::showMeals, Throwable::printStackTrace);
         disposableContainer.add(disposable);
     }
+
+    @Override
+    public void clear() {
+        disposableContainer.clear();
+    }
 }
