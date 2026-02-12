@@ -5,7 +5,7 @@ import androidx.room.Insert;
 import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
 
-import com.example.mealsplanner.data.model.entity.AreaEntity;
+import com.example.mealsplanner.data.domain.entity.AreaEntity;
 
 import java.util.List;
 

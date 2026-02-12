@@ -2,7 +2,6 @@ package com.example.mealsplanner.core;
 
 import android.annotation.SuppressLint;
 import android.app.Application;
-import android.widget.Toast;
 
 import com.example.mealsplanner.data.repository.UserRepository;
 import com.example.mealsplanner.data.source.local.db.AppDatabase;
@@ -40,16 +39,7 @@ public class BaseApplication extends Application {
         if (sessionManager.isLoggedIn()) {
             loadCurrentUser(sessionManager.getUserId());
         }
-        connectivityObserver.observe()
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(isConnected -> {
-                    if (isConnected) {
-                        Toast.makeText(this, "Connected", Toast.LENGTH_SHORT).show();
-                    } else {
-                        Toast.makeText(this, "Disconnected", Toast.LENGTH_SHORT).show();
-                    }
-                });
+
         sessionManager.saveRandomMeal(null);
 
     }

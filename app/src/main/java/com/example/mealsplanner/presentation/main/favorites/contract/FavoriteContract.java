@@ -1,6 +1,6 @@
 package com.example.mealsplanner.presentation.main.favorites.contract;
 
-import com.example.mealsplanner.data.model.domain.Meal;
+import com.example.mealsplanner.data.domain.model.Meal;
 
 import java.util.List;
 
@@ -17,6 +17,8 @@ public class FavoriteContract {
         void getFavoriteMeals();
 
         void removeFavoriteMeal(String mealId);
+
+        void clear();
 
     }
 

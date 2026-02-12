@@ -8,6 +8,9 @@
     android:backgroundTint="#26FFFFFF"
     app:cardCornerRadius="12dp"
     app:cardElevation="0dp"
+    android:clickable="true"
+    android:focusable="true"
+    android:foreground="?attr/selectableItemBackgroundBorderless"
     app:strokeWidth="0dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout

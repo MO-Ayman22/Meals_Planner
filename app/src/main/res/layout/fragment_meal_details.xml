@@ -37,16 +37,17 @@
             app:tint="@color/primary" />
 
         <ImageButton
-            android:id="@+id/backButton"
+            android:id="@+id/addToPlanner"
             android:layout_width="48dp"
             android:layout_height="48dp"
             android:layout_margin="16dp"
             android:background="@drawable/bg_oval"
             android:elevation="2dp"
             android:padding="8dp"
-            android:src="@drawable/ic_back"
+            android:src="@drawable/ic_calendar"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:tint="@color/primary" />
 
         <TextView
             android:id="@+id/tvMealTitle"
@@ -54,7 +55,7 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="32dp"
             android:elevation="2dp"
-            android:text="Mediterranean Buddha Bowl"
+            tools:text="Mediterranean Buddha Bowl"
             android:textColor="@color/white"
             android:textSize="32sp"
             android:textStyle="bold"
@@ -68,7 +69,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="20dp"
             android:elevation="2dp"
-            android:text="Mediterranean"
+            tools:text="Mediterranean"
             android:textColor="@color/white"
             android:textSize="16sp"
             app:layout_constraintBottom_toBottomOf="@+id/ivMeal"
@@ -137,16 +138,8 @@
                 android:id="@+id/cookingVideo"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:visibility="gone" />
+                android:visibility="visible" />
 
-            <ImageButton
-                android:id="@+id/playButton"
-                android:layout_width="60dp"
-                android:layout_height="60dp"
-                android:layout_gravity="center"
-                android:background="@android:color/transparent"
-                android:scaleType="fitXY"
-                android:src="@drawable/ic_play" />
         </com.google.android.material.card.MaterialCardView>
 
         <TextView

@@ -4,6 +4,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -12,7 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.mealsplanner.R;
-import com.example.mealsplanner.data.model.domain.Meal;
+import com.example.mealsplanner.data.domain.model.Meal;
 
 import java.util.List;
 
@@ -61,9 +62,12 @@ public class FavoriteAdapter
 
         ImageView imgMeal;
         TextView tvMealTitle;
+        ImageButton ibDelete;
+
 
         public FavoriteViewHolder(@NonNull View itemView) {
             super(itemView);
+            ibDelete = itemView.findViewById(R.id.ibDelete);
             imgMeal = itemView.findViewById(R.id.ivMealImage);
             tvMealTitle = itemView.findViewById(R.id.tvTitle);
         }
@@ -80,6 +84,9 @@ public class FavoriteAdapter
 
             itemView.setOnClickListener(v ->
                     listener.onFavouriteClick(meal)
+            );
+            ibDelete.setOnClickListener(v ->
+                    listener.onDeleteClick(meal)
             );
         }
     }

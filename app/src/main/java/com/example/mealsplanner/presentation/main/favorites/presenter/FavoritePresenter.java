@@ -43,4 +43,9 @@ public class FavoritePresenter implements FavoriteContract.Presenter {
         compositeDisposable.add(disposable);
     }
 
+    @Override
+    public void clear() {
+        compositeDisposable.clear();
+    }
+
 }

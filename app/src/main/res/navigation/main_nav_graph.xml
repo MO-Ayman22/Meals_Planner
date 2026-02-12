@@ -70,28 +70,35 @@
         android:id="@+id/searchFragment"
         android:name="com.example.mealsplanner.presentation.main.search.view.SearchFragment"
         android:label="Search"
-        tools:layout="@layout/fragment_search" />
+        tools:layout="@layout/fragment_search">
+        <action
+            android:id="@+id/action_searchFragment_to_mealDetailsFragment"
+            app:destination="@id/mealDetailsFragment" />
+    </fragment>
 
     <!-- Profile Fragment -->
-    <fragment
-        android:id="@+id/profileFragment"
-        android:name="com.example.mealsplanner.presentation.main.profile.view.ProfileFragment"
-        android:label="Profile"
-        tools:layout="@layout/fragment_profile" />
 
     <!-- Planner Fragment -->
     <fragment
         android:id="@+id/plannerFragment"
         android:name="com.example.mealsplanner.presentation.main.planner.view.PlannerFragment"
         android:label="Planner"
-        tools:layout="@layout/fragment_planner" />
+        tools:layout="@layout/fragment_planner">
+        <action
+            android:id="@+id/action_plannerFragment_to_mealDetailsFragment"
+            app:destination="@id/mealDetailsFragment" />
+    </fragment>
 
     <!-- Favorites Fragment -->
     <fragment
         android:id="@+id/favoritesFragment"
         android:name="com.example.mealsplanner.presentation.main.favorites.view.FavoritesFragment"
         android:label="Favorites"
-        tools:layout="@layout/fragment_favorites" />
+        tools:layout="@layout/fragment_favorites">
+        <action
+            android:id="@+id/action_favoritesFragment_to_mealDetailsFragment"
+            app:destination="@id/mealDetailsFragment" />
+    </fragment>
 
     <!-- Area Meals Fragment -->
     <fragment

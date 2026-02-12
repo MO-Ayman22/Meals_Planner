@@ -16,9 +16,9 @@ import androidx.recyclerview.widget.PagerSnapHelper;
 
 import com.bumptech.glide.Glide;
 import com.example.mealsplanner.core.AppInjection;
-import com.example.mealsplanner.data.model.domain.Area;
-import com.example.mealsplanner.data.model.domain.Category;
-import com.example.mealsplanner.data.model.domain.Meal;
+import com.example.mealsplanner.data.domain.model.Area;
+import com.example.mealsplanner.data.domain.model.Category;
+import com.example.mealsplanner.data.domain.model.Meal;
 import com.example.mealsplanner.databinding.FragmentHomeBinding;
 import com.example.mealsplanner.presentation.main.home.contract.HomeContract;
 import com.example.mealsplanner.presentation.main.home.presenter.HomePresenter;
@@ -137,5 +137,25 @@ public class HomeFragment extends Fragment implements HomeContract.View, OnCateg
     public void onAreaClick(Area area) {
         NavDirections action = HomeFragmentDirections.actionHomeFragmentToAreaMealsFragment(area.getName());
         NavHostFragment.findNavController(this).navigate(action);
+    }
+
+    @Override
+    public void LostConnection() {
+        if (binding == null) return;
+        binding.noConnection.setVisibility(View.VISIBLE);
+        binding.connectedContainer.setVisibility(View.GONE);
+    }
+
+    @Override
+    public void Connected() {
+        if (binding == null) return;
+        binding.noConnection.setVisibility(View.GONE);
+        binding.connectedContainer.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        presenter.clear();
     }
 }

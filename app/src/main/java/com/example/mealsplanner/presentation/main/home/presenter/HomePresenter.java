@@ -63,4 +63,25 @@ public class HomePresenter implements HomeContract.Presenter {
         disposableContainer.add(disposable);
 
     }
+
+    @Override
+    public void internetObserve() {
+        Disposable disposable = BaseApplication.getInstance().connectivity().observe()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(isConnected -> {
+                    if (isConnected) {
+                        view.Connected();
+                    } else {
+                        view.LostConnection();
+                    }
+                });
+        disposableContainer.add(disposable);
+    }
+
+    @Override
+    public void clear() {
+        disposableContainer.clear();
+    }
+
 }

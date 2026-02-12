@@ -9,10 +9,12 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.NavDirections;
+import androidx.navigation.fragment.NavHostFragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.example.mealsplanner.core.AppInjection;
-import com.example.mealsplanner.data.model.domain.Meal;
+import com.example.mealsplanner.data.domain.model.Meal;
 import com.example.mealsplanner.databinding.FragmentFavoritesBinding;
 import com.example.mealsplanner.presentation.main.favorites.contract.FavoriteContract;
 
@@ -78,7 +80,18 @@ public class FavoritesFragment extends Fragment implements FavoriteContract.View
 
     @Override
     public void onFavouriteClick(Meal meal) {
-        presenter.removeFavoriteMeal(meal.getId());
+        NavDirections action = FavoritesFragmentDirections.actionFavoritesFragmentToMealDetailsFragment(meal.getId());
+        NavHostFragment.findNavController(this).navigate(action);
+    }
 
+    @Override
+    public void onDeleteClick(Meal meal) {
+        presenter.removeFavoriteMeal(meal.getId());
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        presenter.clear();
     }
 }
