@@ -14,8 +14,14 @@ import androidx.navigation.NavController;
 import androidx.navigation.fragment.NavHostFragment;
 
 import com.example.mealsplanner.R;
+import com.example.mealsplanner.data.repository.AuthRepository;
+import com.example.mealsplanner.data.repository.UserRepository;
+import com.example.mealsplanner.data.source.local.db.AppDatabase;
+import com.example.mealsplanner.data.source.local.usersource.UserLocalDataSourceImpl;
+import com.example.mealsplanner.data.source.remote.auth.AuthRemoteDataSourceImpl;
+import com.example.mealsplanner.data.source.remote.usersource.UserRemoteDataSourceImpl;
 import com.example.mealsplanner.databinding.FragmentLoginBinding;
-import com.example.mealsplanner.presentation.home.HomeActivity;
+import com.example.mealsplanner.presentation.main.MainActivity;
 
 public class LoginFragment extends Fragment implements LoginContract.View {
 
@@ -38,7 +44,10 @@ public class LoginFragment extends Fragment implements LoginContract.View {
     }
 
     private void initFragment(View view) {
-        presenter = new LoginPresenter(requireActivity().getApplication(), this);
+        presenter = new LoginPresenter(new AuthRepository(new AuthRemoteDataSourceImpl(requireActivity().getApplication())),
+                new UserRepository(new UserRemoteDataSourceImpl(),
+                        new UserLocalDataSourceImpl(AppDatabase.getInstance(requireContext()).getUserDAO())),
+                this);
         navController = NavHostFragment.findNavController(this);
     }
 
@@ -66,7 +75,7 @@ public class LoginFragment extends Fragment implements LoginContract.View {
 
     private void navigateToHome() {
         if (!isAdded()) return;
-        Intent intent = new Intent(requireContext(), HomeActivity.class);
+        Intent intent = new Intent(requireContext(), MainActivity.class);
         startActivity(intent);
         requireActivity().overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
         requireActivity().finish();
@@ -124,5 +133,11 @@ public class LoginFragment extends Fragment implements LoginContract.View {
     @Override
     public void onLoginError(String message) {
         Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        presenter.clear();
     }
 }

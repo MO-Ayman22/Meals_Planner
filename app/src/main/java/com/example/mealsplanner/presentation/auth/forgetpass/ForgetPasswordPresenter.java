@@ -1,27 +1,27 @@
 package com.example.mealsplanner.presentation.auth.forgetpass;
 
-import android.app.Application;
-
-import androidx.annotation.NonNull;
-
 import com.example.mealsplanner.data.repository.AuthRepository;
 import com.example.mealsplanner.data.repository.UserRepository;
-import com.example.mealsplanner.data.source.remote.auth.FirebaseAuthSource;
-import com.example.mealsplanner.data.source.remote.firestore.FirebaseFirestoreSource;
 import com.example.mealsplanner.util.ValidationUtil;
-import com.google.firebase.auth.FirebaseUser;
+
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
+import io.reactivex.rxjava3.disposables.CompositeDisposable;
+import io.reactivex.rxjava3.disposables.Disposable;
+import io.reactivex.rxjava3.schedulers.Schedulers;
 
 public class ForgetPasswordPresenter implements ForgetPasswordContract.Presenter {
 
     private final ForgetPasswordContract.View view;
     private final AuthRepository authRepository;
     private final UserRepository userRepository;
+    private final CompositeDisposable disposables = new CompositeDisposable();
 
 
-    public ForgetPasswordPresenter(Application app, ForgetPasswordContract.View view) {
+    public ForgetPasswordPresenter(AuthRepository authRepository, UserRepository userRepository, ForgetPasswordContract.View view) {
+
         this.view = view;
-        this.authRepository = new AuthRepository(app);
-        this.userRepository = new UserRepository();
+        this.authRepository = authRepository;
+        this.userRepository = userRepository;
     }
 
 
@@ -32,42 +32,39 @@ public class ForgetPasswordPresenter implements ForgetPasswordContract.Presenter
             view.showEmailError(emailError);
             return;
         }
-        userRepository.existsByEmail(email, new FirebaseFirestoreSource.ExistsCallback() {
-            @Override
-            public void onResult(boolean exists) {
-                if (!exists) {
-                    view.showEmailError("User does not exist");
-                } else {
-                    view.showResetPasswordButtonLoading();
-                    authRepository.resetPassword(email, new FirebaseAuthSource.AuthCallback() {
-                        @Override
-                        public void onSuccess(FirebaseUser user) {
+        Disposable disposable = userRepository.existsByEmail(email)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(
+                        exists -> {
+                            if (exists) {
+                                view.showResetPasswordButtonLoading();
+                                Disposable d = authRepository.resetPassword(email)
+                                        .subscribeOn(Schedulers.io())
+                                        .observeOn(AndroidSchedulers.mainThread())
+                                        .subscribe(
+                                                () -> {
+                                                    view.hideResetPasswordButtonLoading();
+                                                    view.onResetPasswordSuccess();
+                                                }
+                                                , throwable -> {
+                                                    view.hideResetPasswordButtonLoading();
+                                                    view.onResetPasswordError(throwable.getMessage());
+                                                });
+                                disposables.add(d);
+                            } else {
+                                view.showEmailError("Email does not exist");
+                            }
+                        },
+                        throwable -> {
                             view.hideResetPasswordButtonLoading();
-                            view.onResetPasswordSuccess();
-                        }
+                            view.onResetPasswordError(throwable.getMessage());
+                        });
+        disposables.add(disposable);
+    }
 
-                        @Override
-                        public void onFailure(@NonNull Exception e) {
-                            view.hideResetPasswordButtonLoading();
-                            view.onResetPasswordError(e.getMessage());
-                        }
-
-                        @Override
-                        public void onCancelled() {
-                            view.hideResetPasswordButtonLoading();
-                            view.onResetPasswordError("Something went wrong");
-                        }
-                    });
-                }
-            }
-
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                view.hideResetPasswordButtonLoading();
-                view.onResetPasswordError(e.getMessage());
-            }
-        });
-
-
+    @Override
+    public void clear() {
+        disposables.clear();
     }
 }
