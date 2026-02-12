@@ -2,7 +2,7 @@ package com.example.mealsplanner.presentation.auth.login;
 
 import com.example.mealsplanner.core.BaseApplication;
 import com.example.mealsplanner.core.SessionManager;
-import com.example.mealsplanner.data.model.domain.User;
+import com.example.mealsplanner.data.domain.model.User;
 import com.example.mealsplanner.data.repository.AuthRepository;
 import com.example.mealsplanner.data.repository.UserRepository;
 import com.example.mealsplanner.util.ValidationUtil;

@@ -30,4 +30,9 @@ public class CategoryMealsPresenter implements CategoryMealsContract.Presenter {
                         , Throwable::printStackTrace);
         disposableContainer.add(disposable);
     }
+
+    @Override
+    public void clear() {
+        disposableContainer.clear();
+    }
 }

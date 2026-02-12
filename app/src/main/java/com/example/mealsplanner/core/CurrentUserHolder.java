@@ -1,6 +1,6 @@
 package com.example.mealsplanner.core;
 
-import com.example.mealsplanner.data.model.domain.User;
+import com.example.mealsplanner.data.domain.model.User;
 
 public class CurrentUserHolder {
     private static User currentUser;

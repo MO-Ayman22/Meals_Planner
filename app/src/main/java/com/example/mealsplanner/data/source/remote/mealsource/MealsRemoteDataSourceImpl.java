@@ -1,13 +1,13 @@
 package com.example.mealsplanner.data.source.remote.mealsource;
 
-import com.example.mealsplanner.data.model.dto.AreaDto;
-import com.example.mealsplanner.data.model.dto.CategoryDto;
-import com.example.mealsplanner.data.model.dto.MealDto;
-import com.example.mealsplanner.data.model.dto.MealPreviewDto;
-import com.example.mealsplanner.data.model.wrapper.AreaListResponse;
-import com.example.mealsplanner.data.model.wrapper.CategoriesResponse;
-import com.example.mealsplanner.data.model.wrapper.MealPreviewListResponse;
-import com.example.mealsplanner.data.model.wrapper.MealsResponse;
+import com.example.mealsplanner.data.domain.dto.AreaDto;
+import com.example.mealsplanner.data.domain.dto.CategoryDto;
+import com.example.mealsplanner.data.domain.dto.MealDto;
+import com.example.mealsplanner.data.domain.dto.MealPreviewDto;
+import com.example.mealsplanner.data.domain.wrapper.AreaListResponse;
+import com.example.mealsplanner.data.domain.wrapper.CategoriesResponse;
+import com.example.mealsplanner.data.domain.wrapper.MealPreviewListResponse;
+import com.example.mealsplanner.data.domain.wrapper.MealsResponse;
 import com.example.mealsplanner.data.source.remote.api.MealsApiService;
 
 import java.util.List;

@@ -1,7 +1,7 @@
 package com.example.mealsplanner.util.mapper;
 
-import com.example.mealsplanner.data.model.domain.User;
-import com.example.mealsplanner.data.model.entity.UserEntity;
+import com.example.mealsplanner.data.domain.entity.UserEntity;
+import com.example.mealsplanner.data.domain.model.User;
 
 public class UserMapper {
     public static UserEntity toEntity(User user) {

@@ -1,9 +1,9 @@
 package com.example.mealsplanner.data.source.remote.api;
 
-import com.example.mealsplanner.data.model.wrapper.AreaListResponse;
-import com.example.mealsplanner.data.model.wrapper.CategoriesResponse;
-import com.example.mealsplanner.data.model.wrapper.MealPreviewListResponse;
-import com.example.mealsplanner.data.model.wrapper.MealsResponse;
+import com.example.mealsplanner.data.domain.wrapper.AreaListResponse;
+import com.example.mealsplanner.data.domain.wrapper.CategoriesResponse;
+import com.example.mealsplanner.data.domain.wrapper.MealPreviewListResponse;
+import com.example.mealsplanner.data.domain.wrapper.MealsResponse;
 
 import io.reactivex.rxjava3.core.Single;
 import retrofit2.http.GET;
