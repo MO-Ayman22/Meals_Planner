@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_nav_graph"
+    app:startDestination="@id/homeFragment">
+
+    <!-- Home Fragment -->
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.example.mealsplanner.presentation.main.home.view.HomeFragment"
+        android:label="Home"
+        tools:layout="@layout/fragment_home">
+
+        <!-- Navigation Actions from Home -->
+        <action
+            android:id="@+id/action_homeFragment_to_categoriesFragment"
+            app:destination="@id/categoriesFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_mealDetailsFragment"
+            app:destination="@id/mealDetailsFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_categoryMealsFragment"
+            app:destination="@id/categoryMealsFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_areaMealsFragment"
+            app:destination="@id/areaMealsFragment" />
+    </fragment>
+
+    <!-- Categories Fragment -->
+    <fragment
+        android:id="@+id/categoriesFragment"
+        android:name="com.example.mealsplanner.presentation.main.categories.view.CategoriesFragment"
+        android:label="Categories"
+        tools:layout="@layout/fragment_categories">
+        <action
+            android:id="@+id/action_categoriesFragment_to_categoryMealsFragment"
+            app:destination="@id/categoryMealsFragment" />
+    </fragment>
+
+    <!-- Category Meals Fragment -->
+    <fragment
+        android:id="@+id/categoryMealsFragment"
+        android:name="com.example.mealsplanner.presentation.main.categorymeals.view.CategoryMealsFragment"
+        android:label="Category Meals"
+        tools:layout="@layout/fragment_category_meals">
+        <argument
+            android:name="categoryName"
+            app:argType="string"
+            app:nullable="false" />
+        <action
+            android:id="@+id/action_categoryMealsFragment_to_mealDetailsFragment"
+            app:destination="@id/mealDetailsFragment" />
+    </fragment>
+
+    <!-- Meal Details Fragment -->
+    <fragment
+        android:id="@+id/mealDetailsFragment"
+        android:name="com.example.mealsplanner.presentation.main.mealdetails.view.MealDetailsFragment"
+        android:label="Meal Details"
+        tools:layout="@layout/fragment_meal_details">
+        <argument
+            android:name="mealId"
+            app:argType="string"
+            app:nullable="false" />
+    </fragment>
+
+    <!-- Search Fragment -->
+    <fragment
+        android:id="@+id/searchFragment"
+        android:name="com.example.mealsplanner.presentation.main.search.view.SearchFragment"
+        android:label="Search"
+        tools:layout="@layout/fragment_search" />
+
+    <!-- Profile Fragment -->
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.example.mealsplanner.presentation.main.profile.view.ProfileFragment"
+        android:label="Profile"
+        tools:layout="@layout/fragment_profile" />
+
+    <!-- Planner Fragment -->
+    <fragment
+        android:id="@+id/plannerFragment"
+        android:name="com.example.mealsplanner.presentation.main.planner.view.PlannerFragment"
+        android:label="Planner"
+        tools:layout="@layout/fragment_planner" />
+
+    <!-- Favorites Fragment -->
+    <fragment
+        android:id="@+id/favoritesFragment"
+        android:name="com.example.mealsplanner.presentation.main.favorites.view.FavoritesFragment"
+        android:label="Favorites"
+        tools:layout="@layout/fragment_favorites" />
+
+    <!-- Area Meals Fragment -->
+    <fragment
+        android:id="@+id/areaMealsFragment"
+        android:name="com.example.mealsplanner.presentation.main.areameals.view.AreaMealsFragment"
+        android:label="Area Meals"
+        tools:layout="@layout/fragment_area_meals">
+        <argument
+            android:name="areaName"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_areaMealsFragment_to_mealDetailsFragment"
+            app:destination="@id/mealDetailsFragment" />
+    </fragment>
+
+</navigation>
