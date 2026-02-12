@@ -22,11 +22,20 @@
 <h2>🏗️ Architecture</h2>
 <p>The app follows <strong>Clean Architecture</strong> principles:</p>
 <ul>
-    <li><strong>Presentation Layer:</strong> Fragments, Adapters, and Presenters using MVP pattern.</li>
-    <li><strong>Domain Layer:</strong> Data models (<code>Meal</code>, <code>PlannedMealEntity</code>, <code>DayModel</code>) and business logic.</li>
+    <li><strong>Presentation Layer:</strong> Activities, Fragments, Adapters, and Presenters using MVP pattern.</li>
+    <li><strong>Core Layer:</strong> Handles app-wide logic and utilities:
+        <ul>
+            <li><code>BaseApplication</code> – Initializes app components and singletons.</li>
+            <li><code>SessionManager</code> – Manages user session and preferences.</li>
+            <li><code>CurrentUserHolder</code> – Holds the current logged-in user in memory.</li>
+            <li><code>AppInjection</code> – Provides dependencies like presenters and repositories.</li>
+            <li><code>ConnectivityObserver</code> – Observes network state changes.</li>
+        </ul>
+    </li>
     <li><strong>Data Layer:</strong> Repository pattern, local database (Room), remote data sources (API).</li>
     <li><strong>Utilities:</strong> RxJava3 for reactive programming, Glide for image loading, Material Components for UI.</li>
 </ul>
+
 
 <h3>Key Libraries Used:</h3>
 <ul>
