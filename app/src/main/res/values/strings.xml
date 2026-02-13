@@ -71,4 +71,6 @@
     <string name="terms_of_service">Terms of Service</string>
     <string name="explore_cuisines">Explore Cuisines</string>
     <string name="add_to_planner">Add to Planner</string>
+    <string name="notifications">Notifications</string>
+    <string name="logout">Logout</string>
 </resources>

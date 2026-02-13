@@ -46,7 +46,7 @@ public class AreaRepository {
                                                             AreaMapper.fromDtos(dtos)
                                                     )
                                             ));
-                        });
+                        }).onErrorResumeNext(error -> Flowable.empty());
 
         return localFlow.concatWith(remoteFlow);
     }

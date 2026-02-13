@@ -17,7 +17,7 @@ public class UserRemoteDataSourceImpl implements UserRemoteDataSource {
     public Completable createUser(@NonNull User user) {
         return Completable.create(emitter ->
                 firestore.collection(USERS_COLLECTION)
-                        .document(user.uid())
+                        .document(user.getUid())
                         .set(user)
                         .addOnSuccessListener(unused -> emitter.onComplete())
                         .addOnFailureListener(emitter::onError)

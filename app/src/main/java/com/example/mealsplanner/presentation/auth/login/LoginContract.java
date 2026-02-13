@@ -1,5 +1,7 @@
 package com.example.mealsplanner.presentation.auth.login;
 
+import android.app.Activity;
+
 public interface LoginContract {
 
 
@@ -25,7 +27,7 @@ public interface LoginContract {
 
 
     interface Presenter {
-        void onGoogleLoginClicked();
+        void onGoogleLoginClicked(Activity activity);
 
         void onLoginClicked(String email, String password);
 

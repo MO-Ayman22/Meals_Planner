@@ -41,12 +41,14 @@ public class UserRepository {
     public Single<User> getUser(String uid) {
         return localSource.getUser(uid)
                 .map(UserMapper::toModel)
-                .onErrorResumeNext(error -> Single.never())
-                .concatWith(
+                .onErrorResumeNext(error ->
                         remoteSource.getUser(uid)
-                                .flatMap(user -> saveLocalUser(user).andThen(Single.just(user)))
-                )
-                .firstOrError();
+                                .flatMap(user ->
+                                        saveLocalUser(user)
+                                                .andThen(Single.just(user))
+                                )
+                );
     }
+
 }
 

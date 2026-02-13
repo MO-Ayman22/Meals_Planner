@@ -1,5 +1,7 @@
 package com.example.mealsplanner.presentation.auth.register;
 
+import android.app.Activity;
+
 import com.example.mealsplanner.core.BaseApplication;
 import com.example.mealsplanner.core.SessionManager;
 import com.example.mealsplanner.data.domain.model.User;
@@ -72,11 +74,11 @@ public class RegisterPresenter implements RegisterContract.Presenter {
     }
 
     @Override
-    public void onGoogleLoginClicked() {
+    public void onGoogleLoginClicked(Activity activity) {
         view.showGoogleButtonLoading();
 
         Disposable d =
-                authRepository.loginWithGoogle()
+                authRepository.loginWithGoogle(activity)
                         .subscribeOn(Schedulers.io())
                         .flatMap(firebaseUser ->
                                 userRepository.exists(firebaseUser.getUid())

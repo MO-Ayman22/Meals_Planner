@@ -67,7 +67,7 @@ public class RegisterFragment extends Fragment implements RegisterContract.View 
             presenter.onRegisterClicked(name, email, password, confirmPassword, isChecked);
         });
 
-        binding.butGoogle.setOnClickListener(v -> presenter.onGoogleLoginClicked());
+        binding.butGoogle.setOnClickListener(v -> presenter.onGoogleLoginClicked(requireActivity()));
 
     }
 

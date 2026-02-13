@@ -1,5 +1,7 @@
 package com.example.mealsplanner.presentation.auth.register;
 
+import android.app.Activity;
+
 public interface RegisterContract {
     interface View {
         void showRegisterButtonLoading();
@@ -27,7 +29,7 @@ public interface RegisterContract {
 
     interface Presenter {
 
-        void onGoogleLoginClicked();
+        void onGoogleLoginClicked(Activity activity);
 
         void onRegisterClicked(String name, String email, String password, String confirmPassword, boolean isChecked);
 

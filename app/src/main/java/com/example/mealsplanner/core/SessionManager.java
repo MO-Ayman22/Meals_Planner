@@ -5,6 +5,15 @@ import android.content.SharedPreferences;
 
 import androidx.annotation.Nullable;
 
+import com.example.mealsplanner.data.repository.UserRepository;
+import com.example.mealsplanner.data.source.local.db.AppDatabase;
+import com.example.mealsplanner.data.source.local.usersource.UserLocalDataSourceImpl;
+import com.example.mealsplanner.data.source.remote.usersource.UserRemoteDataSourceImpl;
+
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
+import io.reactivex.rxjava3.disposables.Disposable;
+import io.reactivex.rxjava3.schedulers.Schedulers;
+
 public class SessionManager {
     private static final String PREF_NAME = "user_session";
 
@@ -35,6 +44,7 @@ public class SessionManager {
                 .putBoolean(KEY_IS_LOGGED_IN, true)
                 .putString(KEY_USER_ID, userId)
                 .apply();
+        loadCurrentUser(userId);
     }
 
     public boolean isLoggedIn() {
@@ -59,6 +69,19 @@ public class SessionManager {
 
     public String getRandomMeal() {
         return prefs.getString(KEY_RANDOM_MEAL, null);
+    }
+
+    private void loadCurrentUser(String userId) {
+        UserRepository userRepo = new UserRepository(
+                new UserRemoteDataSourceImpl(),
+                new UserLocalDataSourceImpl(AppDatabase.getInstance(BaseApplication.getInstance()).getUserDAO())
+        );
+
+        Disposable disposable = userRepo.getUser(userId)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(CurrentUserHolder::setUser, throwable -> {
+                });
     }
 
 }

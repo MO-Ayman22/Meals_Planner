@@ -5,7 +5,7 @@ import com.example.mealsplanner.data.domain.model.User;
 
 public class UserMapper {
     public static UserEntity toEntity(User user) {
-        return new UserEntity(user.uid(), user.name(), user.email());
+        return new UserEntity(user.getUid(), user.getName(), user.getEmail());
     }
 
     public static User toModel(UserEntity entity) {

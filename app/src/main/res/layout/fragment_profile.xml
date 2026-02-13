@@ -3,12 +3,14 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
     android:fillViewport="true">
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:paddingBottom="16dp"
         android:background="#edfcf7">
 
         <View
@@ -25,6 +27,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="32dp"
+            android:background="@color/white"
+            android:backgroundTint="@color/white"
             android:layout_marginBottom="16dp"
             app:layout_constraintBottom_toBottomOf="@+id/view3"
             app:layout_constraintEnd_toEndOf="parent"
@@ -58,24 +62,12 @@
                     app:layout_constraintTop_toTopOf="@+id/imgProfile"
                     app:tint="@color/white" />
 
-                <ImageButton
-                    android:id="@+id/butEditImage"
-                    android:layout_width="32dp"
-                    android:layout_height="32dp"
-                    android:background="@drawable/bg_oval"
-                    android:backgroundTint="@color/primary"
-                    android:padding="8dp"
-                    android:src="@drawable/ic_camera"
-                    app:layout_constraintBottom_toBottomOf="@+id/imgProfile"
-                    app:layout_constraintEnd_toEndOf="@+id/imgProfile"
-                    app:tint="#FFFFFF" />
-
                 <TextView
                     android:id="@+id/tvName"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
-                    android:text="Mohamed Ayman"
+                    tools:text="Mohamed Ayman"
                     android:textColor="@color/text_primary"
                     android:textSize="16sp"
                     android:textStyle="bold"
@@ -90,7 +82,7 @@
                     android:id="@+id/tvEmail"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:text="2moo.ayman@gmail.com"
+                    tools:text="2moo.ayman@gmail.com"
                     android:textColor="@color/text_secondary"
                     android:textSize="14sp"
                     app:layout_constraintBottom_toBottomOf="@+id/imgProfile"
@@ -173,7 +165,7 @@
                             android:id="@+id/themeCard"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:backgroundTint="#dbebff"
+                            android:backgroundTint="#FDF0C2"
                             app:cardCornerRadius="8dp"
                             app:strokeWidth="0dp">
 
@@ -182,7 +174,8 @@
                                 android:layout_width="32dp"
                                 android:layout_height="32dp"
                                 android:layout_margin="4dp"
-                                android:src="@drawable/chicken" />
+                                android:src="@drawable/ic_light"
+                                app:tint="#F4BB11" />
                         </com.google.android.material.card.MaterialCardView>
 
 
@@ -248,7 +241,7 @@
                                 android:layout_width="32dp"
                                 android:layout_height="32dp"
                                 android:layout_margin="4dp"
-                                android:src="@drawable/chicken" />
+                                android:src="@drawable/ic_language" />
                         </com.google.android.material.card.MaterialCardView>
 
 
@@ -302,7 +295,7 @@
                             android:id="@+id/notificationCard"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:backgroundTint="#dbebff"
+                            android:backgroundTint="#E1D4F4"
                             app:cardCornerRadius="8dp"
                             app:strokeWidth="0dp">
 
@@ -311,7 +304,7 @@
                                 android:layout_width="32dp"
                                 android:layout_height="32dp"
                                 android:layout_margin="4dp"
-                                android:src="@drawable/chicken" />
+                                android:src="@drawable/ic_notification" />
                         </com.google.android.material.card.MaterialCardView>
 
 
@@ -326,7 +319,7 @@
 
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="Notifications"
+                                android:text="@string/notifications"
                                 android:textColor="@color/text_primary"
                                 android:textSize="16sp" />
 
@@ -343,7 +336,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="32dp"
                             android:checked="true"
-                            app:thumbTint="@color/primary"
+                            app:thumbTint="@color/white"
                             app:trackTint="@color/primary" />
                     </LinearLayout>
 
@@ -354,6 +347,7 @@
         </com.google.android.material.card.MaterialCardView>
 
         <com.google.android.material.card.MaterialCardView
+            android:id="@+id/materialCardView4"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="32dp"
@@ -414,7 +408,7 @@
                             android:id="@+id/PrivacyCard"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:backgroundTint="#dbebff"
+                            android:backgroundTint="#DDFFDA"
                             app:cardCornerRadius="8dp"
                             app:strokeWidth="0dp">
 
@@ -423,7 +417,8 @@
                                 android:layout_width="32dp"
                                 android:layout_height="32dp"
                                 android:layout_margin="4dp"
-                                android:src="@drawable/chicken" />
+                                android:src="@drawable/ic_privacy"
+                                app:tint="@color/primary" />
                         </com.google.android.material.card.MaterialCardView>
 
 
@@ -472,7 +467,7 @@
                         <com.google.android.material.card.MaterialCardView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:backgroundTint="#dbebff"
+                            android:backgroundTint="#FFF2D0"
                             app:cardCornerRadius="8dp"
                             app:strokeWidth="0dp">
 
@@ -480,7 +475,7 @@
                                 android:layout_width="32dp"
                                 android:layout_height="32dp"
                                 android:layout_margin="4dp"
-                                android:src="@drawable/chicken" />
+                                android:src="@drawable/ic_terms" />
                         </com.google.android.material.card.MaterialCardView>
 
 
@@ -532,7 +527,7 @@
                                 android:layout_width="32dp"
                                 android:layout_height="32dp"
                                 android:layout_margin="4dp"
-                                android:src="@drawable/chicken" />
+                                android:src="@drawable/ic_help" />
                         </com.google.android.material.card.MaterialCardView>
 
 
@@ -563,7 +558,29 @@
 
                 </LinearLayout>
             </androidx.constraintlayout.widget.ConstraintLayout>
-
         </com.google.android.material.card.MaterialCardView>
+
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/butLogout"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="32dp"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/bg_buttons_auth"
+            android:backgroundTint="@color/white"
+            android:drawableStart="@drawable/ic_logout"
+            android:elevation="4dp"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:padding="16dp"
+            android:singleLine="true"
+            android:text="@string/logout"
+            android:textAllCaps="false"
+            android:textColor="#F44336"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/materialCardView4" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.core.widget.NestedScrollView>

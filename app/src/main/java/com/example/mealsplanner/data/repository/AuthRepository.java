@@ -1,5 +1,7 @@
 package com.example.mealsplanner.data.repository;
 
+import android.app.Activity;
+
 import com.example.mealsplanner.data.source.remote.auth.AuthRemoteDataSource;
 import com.example.mealsplanner.data.source.remote.auth.AuthRemoteDataSourceImpl;
 import com.google.firebase.auth.FirebaseUser;
@@ -19,8 +21,8 @@ public class AuthRepository {
         return authSource.signInWithEmail(email, password);
     }
 
-    public Single<FirebaseUser> loginWithGoogle() {
-        return authSource.signInWithGoogle();
+    public Single<FirebaseUser> loginWithGoogle(Activity activity) {
+        return authSource.signInWithGoogle(activity);
     }
 
     public Single<FirebaseUser> register(String email, String password, String name) {

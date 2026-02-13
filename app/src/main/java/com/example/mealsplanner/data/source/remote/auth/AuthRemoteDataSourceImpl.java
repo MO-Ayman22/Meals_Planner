@@ -3,6 +3,7 @@ package com.example.mealsplanner.data.source.remote.auth;
 import static com.google.android.libraries.identity.googleid.GoogleIdTokenCredential.TYPE_GOOGLE_ID_TOKEN_CREDENTIAL;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.app.Application;
 import android.os.CancellationSignal;
 
@@ -47,13 +48,13 @@ public class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
     }
 
     @Override
-    public Single<FirebaseUser> signInWithGoogle() {
+    public Single<FirebaseUser> signInWithGoogle(Activity activity) {
         return Single.create(emitter -> {
             credentialManager.getCredentialAsync(
-                    app,
+                    activity,
                     credentialRequest,
                     new CancellationSignal(),
-                    ContextCompat.getMainExecutor(app),
+                    ContextCompat.getMainExecutor(activity),
                     new CredentialManagerCallback<>() {
                         @SuppressLint("CheckResult")
                         @Override

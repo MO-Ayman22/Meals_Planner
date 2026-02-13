@@ -55,7 +55,7 @@ public class HomeFragment extends Fragment implements HomeContract.View, OnCateg
         presenter.getCategories();
         presenter.getAreas();
         presenter.getRandomMeal();
-
+        presenter.internetObserve();
 
     }
 

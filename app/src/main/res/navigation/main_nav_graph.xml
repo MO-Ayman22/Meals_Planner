@@ -113,5 +113,9 @@
             android:id="@+id/action_areaMealsFragment_to_mealDetailsFragment"
             app:destination="@id/mealDetailsFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.example.mealsplanner.presentation.main.profile.view.ProfileFragment"
+        android:label="ProfileFragment" />
 
 </navigation>

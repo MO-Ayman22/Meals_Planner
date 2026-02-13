@@ -57,7 +57,7 @@ public class LoginFragment extends Fragment implements LoginContract.View {
                 binding.edEmail.getText().toString().trim(),
                 binding.edPassword.getText().toString().trim()));
 
-        binding.butGoogle.setOnClickListener(v -> presenter.onGoogleLoginClicked());
+        binding.butGoogle.setOnClickListener(v -> presenter.onGoogleLoginClicked(requireActivity()));
 
         binding.butFacebook.setOnClickListener(v ->
                 Toast.makeText(requireContext(),
