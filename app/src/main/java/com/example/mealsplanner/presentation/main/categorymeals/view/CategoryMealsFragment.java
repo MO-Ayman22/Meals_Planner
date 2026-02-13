@@ -12,7 +12,7 @@ import androidx.navigation.NavDirections;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
-import com.example.mealsplanner.core.AppInjection;
+import com.example.mealsplanner.core.PresenterProvider;
 import com.example.mealsplanner.data.domain.model.MealPreview;
 import com.example.mealsplanner.databinding.FragmentCategoryMealsBinding;
 import com.example.mealsplanner.presentation.main.categorymeals.contract.CategoryMealsContract;
@@ -49,7 +49,7 @@ public class CategoryMealsFragment extends Fragment implements CategoryMealsCont
     }
 
     private void initPresenter() {
-        presenter = AppInjection.provideCategoryMealsPresenter(this);
+        presenter = PresenterProvider.provideCategoryMealsPresenter(this, requireContext());
     }
 
     private void setRecyclerView() {

@@ -13,7 +13,7 @@ import androidx.navigation.NavDirections;
 import androidx.navigation.fragment.NavHostFragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
-import com.example.mealsplanner.core.AppInjection;
+import com.example.mealsplanner.core.PresenterProvider;
 import com.example.mealsplanner.data.domain.model.Meal;
 import com.example.mealsplanner.databinding.FragmentFavoritesBinding;
 import com.example.mealsplanner.presentation.main.favorites.contract.FavoriteContract;
@@ -46,7 +46,7 @@ public class FavoritesFragment extends Fragment implements FavoriteContract.View
     }
 
     private void initPresenter() {
-        presenter = AppInjection.provideFavoritePresenter(this, requireContext());
+        presenter = PresenterProvider.provideFavoritePresenter(this, requireContext());
     }
 
     private void initRecyclerView() {

@@ -13,7 +13,7 @@ import androidx.navigation.NavDirections;
 import androidx.navigation.fragment.NavHostFragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
-import com.example.mealsplanner.core.AppInjection;
+import com.example.mealsplanner.core.PresenterProvider;
 import com.example.mealsplanner.data.domain.entity.PlannedMealEntity;
 import com.example.mealsplanner.data.domain.model.DayModel;
 import com.example.mealsplanner.databinding.FragmentPlannerBinding;
@@ -47,7 +47,7 @@ public class PlannerFragment extends Fragment implements PlannerContract.View, P
 
         super.onViewCreated(view, savedInstanceState);
 
-        presenter = AppInjection.providePlannerPresenter(this, requireContext());
+        presenter = PresenterProvider.providePlannerPresenter(this, requireContext());
 
         setupMealsRecycler();
         setupDaysRecycler();

@@ -2,7 +2,7 @@ package com.example.mealsplanner.data.repository;
 
 
 import com.example.mealsplanner.data.domain.entity.PlannedMealEntity;
-import com.example.mealsplanner.data.source.planner.PlannedMealLocalDataSource;
+import com.example.mealsplanner.data.source.local.planner.PlannedMealLocalDataSource;
 import com.example.mealsplanner.data.source.remote.planner.PlannedMealRemoteDataSource;
 
 import java.util.List;

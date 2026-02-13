@@ -12,7 +12,7 @@ import androidx.navigation.NavDirections;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
-import com.example.mealsplanner.core.AppInjection;
+import com.example.mealsplanner.core.PresenterProvider;
 import com.example.mealsplanner.data.domain.model.MealPreview;
 import com.example.mealsplanner.databinding.FragmentAreaMealsBinding;
 import com.example.mealsplanner.presentation.main.areameals.contract.AreaMealsContract;
@@ -52,7 +52,7 @@ public class AreaMealsFragment extends Fragment implements AreaMealsContract.Vie
     }
 
     private void initPresenter() {
-        presenter = AppInjection.provideAreaMealsPresenter(this);
+        presenter = PresenterProvider.provideAreaMealsPresenter(this);
     }
 
     private void setRecyclerView() {

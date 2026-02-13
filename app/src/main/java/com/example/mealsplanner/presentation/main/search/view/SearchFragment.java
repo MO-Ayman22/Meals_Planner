@@ -15,7 +15,7 @@ import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.example.mealsplanner.R;
-import com.example.mealsplanner.core.AppInjection;
+import com.example.mealsplanner.core.PresenterProvider;
 import com.example.mealsplanner.data.domain.model.Meal;
 import com.example.mealsplanner.databinding.FragmentSearchBinding;
 import com.example.mealsplanner.presentation.main.search.contract.SearchContract;
@@ -49,7 +49,7 @@ public class SearchFragment extends Fragment
         super.onViewCreated(view, savedInstanceState);
         if (!isAdded()) return;
 
-        presenter = AppInjection.provideSearchPresenter(this, requireContext());
+        presenter = PresenterProvider.provideSearchPresenter(this, requireContext());
         initUI();
 
         if (presenter != null) {

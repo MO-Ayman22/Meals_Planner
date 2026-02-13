@@ -14,8 +14,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.bumptech.glide.Glide;
 import com.example.mealsplanner.R;
-import com.example.mealsplanner.core.AppInjection;
 import com.example.mealsplanner.core.BaseApplication;
+import com.example.mealsplanner.core.PresenterProvider;
 import com.example.mealsplanner.data.domain.model.Meal;
 import com.example.mealsplanner.databinding.FragmentMealDetailsBinding;
 import com.example.mealsplanner.presentation.main.mealdetails.contract.MealDetailsContract;
@@ -98,7 +98,7 @@ public class MealDetailsFragment extends Fragment implements MealDetailsContract
 
 
     private void initPresenter() {
-        presenter = AppInjection.provideMealDetailsPresenter(this, requireContext());
+        presenter = PresenterProvider.provideMealDetailsPresenter(this, requireContext());
     }
 
 

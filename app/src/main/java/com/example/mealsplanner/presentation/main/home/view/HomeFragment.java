@@ -15,7 +15,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.PagerSnapHelper;
 
 import com.bumptech.glide.Glide;
-import com.example.mealsplanner.core.AppInjection;
+import com.example.mealsplanner.core.PresenterProvider;
 import com.example.mealsplanner.data.domain.model.Area;
 import com.example.mealsplanner.data.domain.model.Category;
 import com.example.mealsplanner.data.domain.model.Meal;
@@ -91,7 +91,7 @@ public class HomeFragment extends Fragment implements HomeContract.View, OnCateg
 
 
     private void initPresenter() {
-        presenter = AppInjection.provideHomePresenter(this, requireContext());
+        presenter = PresenterProvider.provideHomePresenter(this, requireContext());
     }
 
     private void navigateToCategories() {

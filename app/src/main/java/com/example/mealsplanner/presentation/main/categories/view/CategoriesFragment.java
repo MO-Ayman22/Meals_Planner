@@ -12,7 +12,7 @@ import androidx.navigation.NavDirections;
 import androidx.navigation.fragment.NavHostFragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 
-import com.example.mealsplanner.core.AppInjection;
+import com.example.mealsplanner.core.PresenterProvider;
 import com.example.mealsplanner.data.domain.model.Category;
 import com.example.mealsplanner.databinding.FragmentCategoriesBinding;
 import com.example.mealsplanner.presentation.main.categories.contract.CategoriesContract;
@@ -45,7 +45,7 @@ public class CategoriesFragment extends Fragment implements CategoriesContract.V
     }
 
     private void initPresenter() {
-        presenter = AppInjection.provideCategoriesPresenter(this, requireContext());
+        presenter = PresenterProvider.provideCategoriesPresenter(this, requireContext());
     }
 
     private void setRecyclerView() {
