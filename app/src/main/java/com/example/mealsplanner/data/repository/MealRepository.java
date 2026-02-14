@@ -20,8 +20,8 @@ public class MealRepository {
     }
 
     public Single<Meal> getRandomMeal() {
-        if (BaseApplication.getInstance().session().getRandomMeal() != null) {
-            return getMealById(BaseApplication.getInstance().session().getRandomMeal());
+        if (BaseApplication.getInstance().preferences().getRandomMeal() != null) {
+            return getMealById(BaseApplication.getInstance().preferences().getRandomMeal());
         }
         return remote.getRandomMeal()
                 .map(MealMapper::fromDto);

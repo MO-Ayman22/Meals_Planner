@@ -53,8 +53,8 @@ public class HomePresenter implements HomeContract.Presenter {
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(meal -> {
-                            if (BaseApplication.getInstance().session().getRandomMeal() == null) {
-                                BaseApplication.getInstance().session().saveRandomMeal(meal.getId());
+                            if (BaseApplication.getInstance().preferences().getRandomMeal() == null) {
+                                BaseApplication.getInstance().preferences().saveRandomMeal(meal.getId());
                             }
                             view.showRandomMeal(meal);
                         },
